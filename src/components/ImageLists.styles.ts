@@ -21,8 +21,8 @@ export const ImageListContainer = styled.div<{ $isLoading: boolean }>`
   flex-wrap: wrap;
   justify-content: center;
 
-  opacity: ${(props) => (props.$isLoading ? "1" : "1")};
-  transition: opacity 200ms ease-out;
+  opacity: ${(props) => (props.$isLoading ? "0.5" : "1")};
+  transition: opacity 350ms ease-out;
 `;
 
 export const DummyImageContainer = styled(ImageContainerWrapper)`

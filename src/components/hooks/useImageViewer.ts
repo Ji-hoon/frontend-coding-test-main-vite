@@ -1,38 +1,35 @@
 import { useDispatch, useSelector } from "react-redux";
 import { imageViewerActions } from "../../store/imageViewer.slice";
-import { StoreProps } from "../../global/types";
-import { useState } from "react";
+import { ImageProps, StoreProps } from "../../global/types";
 
 export default function useImageViewer() {
   const dispatch = useDispatch();
-  const [imageOriginPos, setImageOriginPos] = useState({
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-  });
 
   const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
 
-  const handleClick = (imageUrl?: string) => {
-    console.log(imageUrl);
-
+  const handleClick = ({
+    imageUrl,
+    sizeAndPos,
+  }: {
+    imageUrl?: string;
+    sizeAndPos?: ImageProps;
+  }) => {
     if (!isViewerEnabled) {
-      dispatch(imageViewerActions.open(imageUrl));
+      dispatch(imageViewerActions.open({ src: imageUrl, pos: sizeAndPos }));
       return;
     }
+    dispatch(imageViewerActions.close());
   };
 
-  const calcImagePosition = (element: Element) => {
+  const calcCurrentPosition = (element: Element) => {
     const offset = element.getBoundingClientRect();
-    console.log(offset);
-    setImageOriginPos({
+    return {
       x: offset.left,
       y: offset.top,
       width: offset.width,
       height: offset.height,
-    });
+    };
   };
 
-  return { handleClick, calcImagePosition, imageOriginPos };
+  return { handleClick, calcCurrentPosition, isViewerEnabled };
 }

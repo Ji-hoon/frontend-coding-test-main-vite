@@ -1,20 +1,16 @@
 import ReactDOM from "react-dom";
 import { PortalProps, StoreProps } from "../../global/types";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { imageViewerActions } from "../../store/imageViewer.slice";
+import ImageContainer from "../ImageContainer/ImageContainer";
+import useImageViewer from "../hooks/useImageViewer";
+import ImageViewerBackdrop from "./ImageViewer.backdrop";
 
-export default function ImageViewer({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
-  const dispatch = useDispatch();
-
-  function handleBackdropClick() {
-    dispatch(imageViewerActions.close());
-  }
+export default function ImageViewer() {
+  const { imageUrl, imagePosAndSize } = useSelector(
+    (state: StoreProps) => state.viewer
+  );
+  const { handleClick, isViewerEnabled } = useImageViewer();
 
   const ViewerPortal = ({ children }: PortalProps) => {
     return ReactDOM.createPortal(
@@ -25,11 +21,23 @@ export default function ImageViewer({
 
   return (
     <ViewerPortal>
-      <ViewerContainer $enabled={isViewerEnabled}>
-        <div className="backdrop" />
-        <div className="imageContainer" onClick={handleBackdropClick}>
-          {children}
-        </div>
+      <ViewerContainer
+        className={isViewerEnabled ? "open" : "closed"}
+        $enabled={isViewerEnabled}
+      >
+        <ImageViewerBackdrop />
+        <ImageContainer
+          id="view"
+          src={imageUrl}
+          onClick={handleClick}
+          absolutePos={{
+            isAbsolute: true,
+            x: imagePosAndSize.x,
+            y: imagePosAndSize.y,
+            width: imagePosAndSize.width,
+            height: imagePosAndSize.height,
+          }}
+        />
       </ViewerContainer>
     </ViewerPortal>
   );
@@ -44,26 +52,9 @@ const ViewerContainer = styled.div<{
   right: 0;
   bottom: 0;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   pointer-events: ${(props) => (props.$enabled ? "auto" : "none")};
 
-  & .backdrop {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-
-    background-color: #fff;
-    opacity: ${(props) => (props.$enabled ? "0.5" : "0")};
-
-    transition: opacity 400ms ease-out;
-  }
-
-  & .imageContainer {
-    z-index: 1;
-    cursor: pointer;
-    opacity: ${(props) => (props.$enabled ? "1" : "0")};
+  &.open .absolute {
+    opacity: 1;
   }
 `;

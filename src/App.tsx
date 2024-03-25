@@ -2,11 +2,18 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import CatViewer from "./pages/CatViewer";
 import WorkingHours from "./pages/WorkingHours";
 import "./App.css";
+import { StoreProps } from "./global/types";
+import { useSelector } from "react-redux";
 
 function App() {
+  const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
+
   return (
     <Router>
-      <div className="App">
+      <div
+        className="App"
+        style={{ overflow: isViewerEnabled ? "hidden" : "auto" }}
+      >
         <nav
           style={{
             position: "fixed",

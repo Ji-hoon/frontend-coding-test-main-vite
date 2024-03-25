@@ -1,6 +1,6 @@
 import { throttle } from "lodash";
 import { useEffect } from "react";
-import { imageType } from "../global/types";
+import { StoreProps, imageType } from "../global/types";
 import useImageLists from "./ImageLists.hooks";
 import {
   ImageColumn,
@@ -11,8 +11,11 @@ import {
 import ImageContainer from "./ImageContainer/ImageContainer";
 import Loading from "./Loading/Loading";
 import { VALUES } from "../global/constants";
+import useImageViewer from "./hooks/useImageViewer";
+import { useSelector } from "react-redux";
 
 export default function ImageList() {
+  const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
   const {
     pageColumn,
     setPageColumn,
@@ -21,7 +24,9 @@ export default function ImageList() {
     isError,
     setTarget,
     pageCount,
+    setPageCount,
   } = useImageLists();
+  const { handleClick } = useImageViewer();
 
   const handleResize = throttle(() => {
     if (window.innerWidth > VALUES.BREAKPOINT_XLARGE) {
@@ -48,7 +53,8 @@ export default function ImageList() {
 
   return (
     <>
-      <ImageListContainer $isLoading={isLoading}>
+      <button onClick={() => setPageCount(pageCount)}>새로고침</button>
+      <ImageListContainer $isLoading={isViewerEnabled}>
         {imageElements.length > 0 && (
           <>
             <ImageColumn $columnCount={pageColumn}>
@@ -60,11 +66,10 @@ export default function ImageList() {
                 )
                   return (
                     <ImageContainer
-                      id={String(index)}
+                      onClick={handleClick}
+                      id={image.id}
                       key={index}
                       src={image.url}
-                      width={image.width}
-                      height={image.height}
                     />
                   );
               })}
@@ -80,11 +85,10 @@ export default function ImageList() {
                   )
                     return (
                       <ImageContainer
-                        id={String(index)}
+                        onClick={handleClick}
+                        id={image.id}
                         key={index}
                         src={image.url}
-                        width={image.width}
-                        height={image.height}
                       />
                     );
                 })}
@@ -96,11 +100,10 @@ export default function ImageList() {
                   if ((index - 3) % 3 === 2 || index === 2)
                     return (
                       <ImageContainer
-                        id={String(index)}
+                        onClick={handleClick}
+                        id={image.id}
                         key={index}
                         src={image.url}
-                        width={image.width}
-                        height={image.height}
                       />
                     );
                 })}
@@ -118,7 +121,7 @@ export default function ImageList() {
       {isError && (
         <ErrorContainer>
           <p>에러가 발생했습니다.</p>
-          <button>새로고침</button>
+          <button onClick={() => setPageCount(pageCount)}>새로고침</button>
         </ErrorContainer>
       )}
     </>

@@ -13,5 +13,13 @@ export type StoreProps = {
   viewer: {
     isViewerEnabled: boolean;
     imageUrl: string;
+    imagePosAndSize: ImageProps;
   };
+};
+
+export type ImageProps = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 };
