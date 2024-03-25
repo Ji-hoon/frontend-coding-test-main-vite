@@ -1,6 +1,6 @@
 import { throttle } from "lodash";
 import { useEffect } from "react";
-import { StoreProps, imageType } from "../global/types";
+import { imageType } from "../global/types";
 import useImageLists from "./ImageLists.hooks";
 import {
   ImageColumn,
@@ -12,10 +12,8 @@ import ImageContainer from "./ImageContainer/ImageContainer";
 import Loading from "./Loading/Loading";
 import { VALUES } from "../global/constants";
 import useImageViewer from "./hooks/useImageViewer";
-import { useSelector } from "react-redux";
 
 export default function ImageList() {
-  const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
   const {
     pageColumn,
     setPageColumn,
@@ -54,7 +52,7 @@ export default function ImageList() {
   return (
     <>
       <button onClick={() => setPageCount(pageCount)}>새로고침</button>
-      <ImageListContainer $isLoading={isViewerEnabled}>
+      <ImageListContainer>
         {imageElements.length > 0 && (
           <>
             <ImageColumn $columnCount={pageColumn}>

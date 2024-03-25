@@ -13,7 +13,7 @@ export const ImageColumn = styled.div<{ $columnCount: number }>`
   }
 `;
 
-export const ImageListContainer = styled.div<{ $isLoading: boolean }>`
+export const ImageListContainer = styled.div<{ $isLoading?: boolean }>`
   display: flex;
   max-width: 1200px;
   min-height: 100vh;

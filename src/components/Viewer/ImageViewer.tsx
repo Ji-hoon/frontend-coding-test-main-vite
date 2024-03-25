@@ -1,5 +1,4 @@
-import ReactDOM from "react-dom";
-import { PortalProps, StoreProps } from "../../global/types";
+import { StoreProps } from "../../global/types";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import ImageContainer from "../ImageContainer/ImageContainer";
@@ -12,15 +11,8 @@ export default function ImageViewer() {
   );
   const { handleClick, isViewerEnabled } = useImageViewer();
 
-  const ViewerPortal = ({ children }: PortalProps) => {
-    return ReactDOM.createPortal(
-      children,
-      document.getElementById("viewer") as HTMLElement
-    );
-  };
-
   return (
-    <ViewerPortal>
+    <>
       <ViewerContainer
         className={isViewerEnabled ? "open" : "closed"}
         $enabled={isViewerEnabled}
@@ -39,7 +31,7 @@ export default function ImageViewer() {
           }}
         />
       </ViewerContainer>
-    </ViewerPortal>
+    </>
   );
 }
 
@@ -53,6 +45,10 @@ const ViewerContainer = styled.div<{
   bottom: 0;
 
   pointer-events: ${(props) => (props.$enabled ? "auto" : "none")};
+
+  &.open .backdrop {
+    opacity: 0.5;
+  }
 
   &.open .absolute {
     opacity: 1;

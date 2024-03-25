@@ -22,6 +22,7 @@ const imageViewerSlice = createSlice({
     },
     close(state) {
       state.isViewerEnabled = false;
+      state.imageUrl = "";
     },
     zoomIn(state, action) {
       state.imagePosAndSize = action.payload.pos;

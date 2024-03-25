@@ -11,4 +11,6 @@ const Backdrop = styled.div`
 
   background-color: #fff;
   opacity: 0;
+
+  transition: opacity 350ms cubic-bezier(0.52, 0.13, 0.33, 1.05);
 `;

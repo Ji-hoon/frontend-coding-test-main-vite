@@ -63,16 +63,20 @@ export const ImageContainerWrapper = styled.div<{
   border-radius: 5px;
   overflow: hidden;
 
+  left: ${(props) => props.x}px;
+  top: ${(props) => props.y}px;
+
+  width: ${(props) => props.width}px;
+  height: ${(props) => props.height}px;
+
   &.absolute {
-    opacity: 0;
     position: absolute;
+    opacity: 0;
     left: ${(props) => props.x}px;
     top: ${(props) => props.y}px;
 
     width: ${(props) => props.width}px;
     height: ${(props) => props.height}px;
-
-    transition: all 350ms cubic-bezier(0.52, 0.13, 0.33, 1.05);
   }
 
   & img {
