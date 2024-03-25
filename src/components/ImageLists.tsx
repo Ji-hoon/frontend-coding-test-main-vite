@@ -6,6 +6,7 @@ import {
   ImageColumn,
   ImageListContainer,
   DummyImageContainer,
+  ErrorContainer,
 } from "./ImageLists.styles";
 import ImageContainer from "./ImageContainer/ImageContainer";
 import Loading from "./Loading/Loading";
@@ -19,6 +20,7 @@ export default function ImageList() {
     imageElements,
     isError,
     setTarget,
+    pageCount,
   } = useImageLists();
 
   const handleResize = throttle(() => {
@@ -46,8 +48,8 @@ export default function ImageList() {
 
   return (
     <>
-      {imageElements.length > 0 && (
-        <ImageListContainer $isLoading={isLoading}>
+      <ImageListContainer $isLoading={isLoading}>
+        {imageElements.length > 0 && (
           <>
             <ImageColumn $columnCount={pageColumn}>
               {imageElements.map((image: imageType, index) => {
@@ -105,13 +107,20 @@ export default function ImageList() {
               </ImageColumn>
             )}
           </>
-        </ImageListContainer>
-      )}
+        )}
+        {isLoading && <Loading $init={pageCount === 0 ? true : false} />}
+      </ImageListContainer>
+
       {imageElements.length > 0 && !isLoading && (
         <DummyImageContainer ref={setTarget} />
       )}
-      {isLoading && <Loading />}
-      {isError && <>에러가 발생했습니다.</>}
+
+      {isError && (
+        <ErrorContainer>
+          <p>에러가 발생했습니다.</p>
+          <button>새로고침</button>
+        </ErrorContainer>
+      )}
     </>
   );
 }

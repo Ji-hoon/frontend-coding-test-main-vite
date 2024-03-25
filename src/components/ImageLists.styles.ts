@@ -16,15 +16,20 @@ export const ImageColumn = styled.div<{ $columnCount: number }>`
 export const ImageListContainer = styled.div<{ $isLoading: boolean }>`
   display: flex;
   max-width: 1200px;
+  min-height: 100vh;
   gap: 16px;
   flex-wrap: wrap;
   justify-content: center;
 
-  opacity: ${(props) => (props.$isLoading ? "0.5" : "1")};
+  opacity: ${(props) => (props.$isLoading ? "1" : "1")};
   transition: opacity 200ms ease-out;
 `;
 
 export const DummyImageContainer = styled(ImageContainerWrapper)`
   height: 10px;
   background-color: transparent;
+`;
+
+export const ErrorContainer = styled.div`
+  display: flex;
 `;

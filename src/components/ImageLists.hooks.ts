@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { imageType } from "../global/types";
 import { axiosInstance } from "../global/axiosInstance";
 import { API_KEY, VALUES } from "../global/constants";
@@ -19,7 +19,7 @@ export default function useImageLists() {
     },
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     axiosInstance
       .get(
         `/search?limit=${VALUES.IMAGE_LIMIT_COUNT}&page=${pageCount}&api_key=${API_KEY}`
@@ -36,6 +36,7 @@ export default function useImageLists() {
       .catch((error) => {
         // error
         console.log(error);
+        setIsLoading(false);
         setIsError(true);
       });
 
