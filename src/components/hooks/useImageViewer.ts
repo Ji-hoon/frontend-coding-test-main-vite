@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { imageViewerActions } from "../../store/imageViewer.slice";
 import { ImageProps, StoreProps } from "../../global/types";
+import { VALUES } from "../../global/constants";
 
 export default function useImageViewer() {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ export default function useImageViewer() {
       dispatch(imageViewerActions.open({ src: imageUrl, beforePos }));
       setTimeout(() => {
         dispatch(imageViewerActions.toggleZoom({ beforePos, afterPos }));
-      }, 100);
+      }, VALUES.ANIMATION_DELAY_100);
 
       return;
     }
@@ -38,7 +39,7 @@ export default function useImageViewer() {
 
     setTimeout(() => {
       dispatch(imageViewerActions.reset());
-    }, 300);
+    }, VALUES.ANIMATION_TIMING_SHORT);
   };
 
   return {

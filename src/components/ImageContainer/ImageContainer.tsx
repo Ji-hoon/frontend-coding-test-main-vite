@@ -5,6 +5,7 @@ import {
   calcInnerWindowSize,
 } from "../../utils/calcImageContainer";
 import { useSelector } from "react-redux";
+import { VALUES } from "../../global/constants";
 
 export default function ImageContainer({
   id,
@@ -82,12 +83,12 @@ export const ImageContainerWrapper = styled.div<{
 
   -webkit-transition: ${(props) =>
     props.$beforePos?.isAbsolute
-      ? "all 300ms 0ms cubic-bezier(0.52, 0.13, 0.33, 1.05)"
-      : "opacity 250ms cubic-bezier(0.53, 0.15, 0.34, 1.01)"};
+      ? `all ${VALUES.ANIMATION_TIMING_SHORT}ms 0ms cubic-bezier(0.52, 0.13, 0.33, 1.05)`
+      : `opacity ${VALUES.ANIMATION_TIMING_SHORT}ms cubic-bezier(0.53, 0.15, 0.34, 1.01)`};
   transition: ${(props) =>
     props.$beforePos?.isAbsolute
-      ? "all 300ms 0ms cubic-bezier(0.52, 0.13, 0.33, 1.05)"
-      : "opacity 250ms cubic-bezier(0.53, 0.15, 0.34, 1.01)"};
+      ? `all ${VALUES.ANIMATION_TIMING_SHORT}ms 0ms cubic-bezier(0.52, 0.13, 0.33, 1.05)`
+      : `opacity ${VALUES.ANIMATION_TIMING_SHORT}ms cubic-bezier(0.53, 0.15, 0.34, 1.01)`};
 
   &.open,
   &.closed {
