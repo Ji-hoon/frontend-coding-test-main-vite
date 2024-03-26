@@ -34,10 +34,11 @@ export default function useImageViewer() {
     afterPos: ImageProps;
   }) => {
     dispatch(imageViewerActions.zoomOut({ beforePos, afterPos }));
+    dispatch(imageViewerActions.close());
 
-    setTimeout(() => {
-      dispatch(imageViewerActions.close());
-    }, 350);
+    // setTimeout(() => {
+    //   dispatch(imageViewerActions.close());
+    // }, 0);
   };
 
   return {

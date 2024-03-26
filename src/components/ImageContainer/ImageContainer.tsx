@@ -80,9 +80,7 @@ export const ImageContainerWrapper = styled.div<{
       ? 0.5
       : !props.$isOpen && !props.$beforePos?.isAbsolute
       ? 1
-      : props.$beforePos?.isAbsolute
-      ? 0
-      : 1};
+      : 0};
 
   left: ${(props) => props.$beforePos?.x}px;
   top: ${(props) => props.$beforePos?.y}px;
@@ -90,9 +88,15 @@ export const ImageContainerWrapper = styled.div<{
   width: ${(props) => props.$beforePos?.width}px;
   height: ${(props) => props.$beforePos?.height}px;
 
-  transition: all 350ms cubic-bezier(0.52, 0.13, 0.33, 1.05);
+  transition: ${(props) =>
+    props.$beforePos?.isAbsolute
+      ? "all 300ms cubic-bezier(0.52, 0.13, 0.33, 1.05)"
+      : "opacity 250ms cubic-bezier(0.53, 0.15, 0.34, 1.01)"};
 
   &.closed {
+    visibility: ${(props) => (props.$isOpen ? "visible" : "hidden")};
+    opacity: 1;
+
     left: ${(props) => props.$afterPos?.x}px;
     top: ${(props) => props.$afterPos?.y}px;
 
@@ -112,7 +116,7 @@ export const ImageContainerWrapper = styled.div<{
 
   & img {
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 `;
 
