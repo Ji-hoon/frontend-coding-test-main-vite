@@ -21,7 +21,7 @@ export default function useImageViewer() {
       dispatch(imageViewerActions.open({ src: imageUrl, beforePos }));
       setTimeout(() => {
         dispatch(imageViewerActions.toggleZoom({ beforePos, afterPos }));
-      }, VALUES.ANIMATION_DELAY_100);
+      }, VALUES.ANIMATION_DELAY_50);
 
       return;
     }
