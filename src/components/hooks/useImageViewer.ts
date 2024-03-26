@@ -5,7 +5,13 @@ import { ImageProps, StoreProps } from "../../global/types";
 export default function useImageViewer() {
   const dispatch = useDispatch();
 
-  const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
+  const {
+    imageUrl,
+    imageBeforePosAndSize,
+    imageAfterPosAndSize,
+    isViewerEnabled,
+    isScrollable,
+  } = useSelector((state: StoreProps) => state.viewer);
 
   const handleZoomIn = ({
     imageUrl,
@@ -21,7 +27,7 @@ export default function useImageViewer() {
       dispatch(imageViewerActions.open({ src: imageUrl, beforePos }));
       setTimeout(() => {
         dispatch(imageViewerActions.toggleZoom({ beforePos, afterPos }));
-      }, 1000);
+      }, 100);
 
       return;
     }
@@ -45,6 +51,10 @@ export default function useImageViewer() {
   return {
     handleZoomIn,
     handleZoomOut,
+    imageUrl,
+    imageBeforePosAndSize,
+    imageAfterPosAndSize,
     isViewerEnabled,
+    isScrollable,
   };
 }

@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
-import { ImageProps, StoreProps } from "../../global/types";
+import { ImageProps } from "../../global/types";
 import {
   calcCurrentPosition,
   calcInnerWindowSize,
 } from "../../utils/calcImageContainer";
-import { useSelector } from "react-redux";
+import useImageViewer from "../hooks/useImageViewer";
 
 export default function ImageContainer({
   id,
@@ -29,7 +29,8 @@ export default function ImageContainer({
   beforePos?: ImageProps & { isAbsolute: boolean };
   afterPos?: ImageProps;
 }) {
-  const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
+  const { isViewerEnabled } = useImageViewer();
+
   console.log("before: ", beforePos, "after", afterPos, isViewerEnabled);
 
   return (

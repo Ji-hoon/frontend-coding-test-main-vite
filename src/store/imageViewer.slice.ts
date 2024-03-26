@@ -38,19 +38,6 @@ const imageViewerSlice = createSlice({
     reset(state) {
       state.isViewerEnabled = false;
       state.isScrollable = true;
-      state.imageUrl = "";
-      state.imageBeforePosAndSize = {
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 0,
-      };
-      state.imageAfterPosAndSize = {
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 0,
-      };
     },
   },
 });

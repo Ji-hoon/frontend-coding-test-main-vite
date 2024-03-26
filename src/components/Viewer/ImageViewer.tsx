@@ -1,15 +1,18 @@
-import { ImageProps, StoreProps } from "../../global/types";
-import { useSelector } from "react-redux";
+import { ImageProps } from "../../global/types";
 import styled from "styled-components";
 import ImageContainer from "../ImageContainer/ImageContainer";
 import useImageViewer from "../hooks/useImageViewer";
 import ImageViewerBackdrop from "./ImageViewer.backdrop";
 
 export default function ImageViewer() {
-  const { imageUrl, imageBeforePosAndSize, imageAfterPosAndSize } = useSelector(
-    (state: StoreProps) => state.viewer
-  );
-  const { handleZoomOut, isViewerEnabled } = useImageViewer();
+  const {
+    handleZoomOut,
+    imageUrl,
+    imageBeforePosAndSize,
+    imageAfterPosAndSize,
+    isViewerEnabled,
+    isScrollable,
+  } = useImageViewer();
   console.log(imageBeforePosAndSize, imageAfterPosAndSize);
 
   return (
@@ -22,7 +25,7 @@ export default function ImageViewer() {
         <ImageViewerBackdrop />
         <ImageContainer
           id="view"
-          classname={isViewerEnabled ? "open" : "closed"}
+          classname={!isScrollable ? "open" : "closed"}
           src={imageUrl}
           onClick={() =>
             handleZoomOut({
