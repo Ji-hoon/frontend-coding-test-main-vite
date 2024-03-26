@@ -6,13 +6,13 @@ import { StoreProps } from "./global/types";
 import { useSelector } from "react-redux";
 
 function App() {
-  const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
+  const { isScrollable } = useSelector((state: StoreProps) => state.viewer);
 
   return (
     <Router>
       <div
         className="App"
-        style={{ overflow: isViewerEnabled ? "hidden" : "auto" }}
+        style={{ overflow: isScrollable ? "auto" : "hidden" }}
       >
         <nav
           style={{

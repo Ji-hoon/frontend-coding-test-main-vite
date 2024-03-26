@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialImageViewerState = {
   isViewerEnabled: false,
+  isScrollable: true,
   imageUrl: "",
   imageBeforePosAndSize: {
     x: 0,
@@ -23,19 +24,33 @@ const imageViewerSlice = createSlice({
   reducers: {
     open(state, action) {
       state.isViewerEnabled = true;
+      state.isScrollable = false;
       state.imageUrl = action.payload.src;
+      state.imageBeforePosAndSize = action.payload.beforePos;
     },
     close(state) {
       state.isViewerEnabled = false;
     },
-    zoomIn(state, action) {
+    toggleZoom(state, action) {
       state.imageBeforePosAndSize = action.payload.beforePos;
       state.imageAfterPosAndSize = action.payload.afterPos;
     },
-    zoomOut(state, action) {
-      state.imageBeforePosAndSize = action.payload.beforePos;
-      state.imageAfterPosAndSize = action.payload.afterPos;
-      console.log(state);
+    reset(state) {
+      state.isViewerEnabled = false;
+      state.isScrollable = true;
+      state.imageUrl = "";
+      state.imageBeforePosAndSize = {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+      };
+      state.imageAfterPosAndSize = {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+      };
     },
   },
 });

@@ -12,6 +12,7 @@ export type PortalProps = {
 export type StoreProps = {
   viewer: {
     isViewerEnabled: boolean;
+    isScrollable: boolean;
     imageUrl: string;
     imageBeforePosAndSize: ImageProps;
     imageAfterPosAndSize: ImageProps;
@@ -19,8 +20,8 @@ export type StoreProps = {
 };
 
 export type ImageProps = {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+  x: number | undefined;
+  y: number | undefined;
+  width: number | undefined;
+  height: number | undefined;
 };

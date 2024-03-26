@@ -17,6 +17,7 @@ export const ImageListContainer = styled.div<{ $isLoading?: boolean }>`
   display: flex;
   max-width: 1200px;
   min-height: 100vh;
+  margin: 0 auto;
   gap: 16px;
   flex-wrap: wrap;
   justify-content: center;
