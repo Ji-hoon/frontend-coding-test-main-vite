@@ -1,6 +1,6 @@
 import { throttle } from "lodash";
 import { useEffect } from "react";
-import { imageType } from "../global/types";
+import { imageType } from "../../global/types";
 import useImageLists from "./ImageLists.hooks";
 import {
   ImageColumn,
@@ -8,12 +8,12 @@ import {
   DummyImageContainer,
   ErrorContainer,
 } from "./ImageLists.styles";
-import ImageContainer from "./ImageContainer/ImageContainer";
-import Loading from "./Loading/Loading";
-import { VALUES } from "../global/constants";
-import useImageViewer from "./hooks/useImageViewer";
+import ImageContainer from "../ImageContainer/ImageContainer";
+import Loading from "../Loading/Loading";
+import { VALUES } from "../../global/constants";
+import useImageViewer from "../hooks/useImageViewer";
 import { useDispatch } from "react-redux";
-import { imageViewerActions } from "../store/imageViewer.slice";
+import { imageViewerActions } from "../../store/imageViewer.slice";
 
 export default function ImageList() {
   const {

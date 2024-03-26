@@ -1,4 +1,4 @@
-import ImageList from "../components/ImageLists";
+import ImageList from "../components/ImageLists/ImageLists";
 import ImageViewer from "../components/Viewer/ImageViewer";
 
 function CatViewer() {

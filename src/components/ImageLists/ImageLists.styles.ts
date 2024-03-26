@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { ImageContainerWrapper } from "./ImageContainer/ImageContainer";
+import { ImageContainerWrapper } from "../ImageContainer/ImageContainer";
 
 export const ImageColumn = styled.div<{ $columnCount: number }>`
   display: flex;

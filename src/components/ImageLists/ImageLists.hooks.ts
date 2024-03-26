@@ -1,8 +1,8 @@
 import { useLayoutEffect, useState } from "react";
-import { imageType } from "../global/types";
-import { axiosInstance } from "../global/axiosInstance";
-import { API_KEY, VALUES } from "../global/constants";
-import { useIntersectionObserver } from "./hooks/useIntersectionObserver";
+import { imageType } from "../../global/types";
+import { axiosInstance } from "../../global/axiosInstance";
+import { API_KEY, VALUES } from "../../global/constants";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 export default function useImageLists() {
   const [pageCount, setPageCount] = useState(0);

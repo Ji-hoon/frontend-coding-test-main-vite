@@ -11,6 +11,7 @@ export default function ImageViewer() {
   );
   const { handleZoomOut, isViewerEnabled } = useImageViewer();
   console.log(imageBeforePosAndSize, imageAfterPosAndSize);
+
   return (
     <>
       <ViewerContainer
@@ -54,8 +55,4 @@ const ViewerContainer = styled.div<{
   bottom: 0;
 
   pointer-events: ${(props) => (props.$enabled ? "auto" : "none")};
-
-  &.open .backdrop {
-    /* opacity: 0.5; */
-  }
 `;

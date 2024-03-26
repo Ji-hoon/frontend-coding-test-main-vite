@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { imageViewerActions } from "../../store/imageViewer.slice";
 import { ImageProps, StoreProps } from "../../global/types";
-// import { useState } from "react";
 
 export default function useImageViewer() {
   const dispatch = useDispatch();
@@ -18,10 +17,12 @@ export default function useImageViewer() {
     afterPos: ImageProps;
   }) => {
     if (!isViewerEnabled) {
-      //   setAfterPos(beforePos);
-      console.log(beforePos, afterPos);
-      dispatch(imageViewerActions.open({ src: imageUrl }));
-      dispatch(imageViewerActions.zoomIn({ beforePos, afterPos }));
+      console.log("before: ", beforePos, "after", afterPos, isViewerEnabled);
+      dispatch(imageViewerActions.open({ src: imageUrl, beforePos }));
+      setTimeout(() => {
+        dispatch(imageViewerActions.toggleZoom({ beforePos, afterPos }));
+      }, 1000);
+
       return;
     }
   };
@@ -33,12 +34,12 @@ export default function useImageViewer() {
     beforePos: ImageProps;
     afterPos: ImageProps;
   }) => {
-    dispatch(imageViewerActions.zoomOut({ beforePos, afterPos }));
+    dispatch(imageViewerActions.toggleZoom({ beforePos, afterPos }));
     dispatch(imageViewerActions.close());
 
-    // setTimeout(() => {
-    //   dispatch(imageViewerActions.close());
-    // }, 0);
+    setTimeout(() => {
+      dispatch(imageViewerActions.reset());
+    }, 300);
   };
 
   return {

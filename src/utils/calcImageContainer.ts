@@ -16,10 +16,10 @@ export const calcInnerWindowSize = (element: Element) => {
 
   const offset = element.getBoundingClientRect();
 
-  let targetWidth = 0;
-  let targetHeight = 0;
-  let targetX = 0;
-  let targetY = 0;
+  let targetWidth;
+  let targetHeight;
+  let targetX;
+  let targetY;
 
   // 이미지의 가로가 길면 윈도우 가로 너비를, 세로가 길면 윈도우 세로 높이를 할당한다.
   // 1. 가로가 긴 경우 targetWidth는 windowWidth 값을 할당하고,
@@ -32,9 +32,7 @@ export const calcInnerWindowSize = (element: Element) => {
     targetHeight = (windowWidth / offset.width) * offset.height;
     targetX = 0;
     targetY = (widdowHeight - targetHeight) / 2;
-  }
-
-  if (offset.width <= offset.height) {
+  } else if (offset.width <= offset.height) {
     targetWidth = (widdowHeight / offset.height) * offset.width;
     targetHeight = widdowHeight;
     targetX = (windowWidth - targetWidth) / 2;
@@ -42,9 +40,9 @@ export const calcInnerWindowSize = (element: Element) => {
   }
 
   return {
-    x: targetX,
-    y: targetY,
-    width: targetWidth,
-    height: targetHeight,
+    x: Math.floor(targetX || 0),
+    y: Math.floor(targetY || 0),
+    width: Math.floor(targetWidth || 0),
+    height: Math.floor(targetHeight || 0),
   };
 };
