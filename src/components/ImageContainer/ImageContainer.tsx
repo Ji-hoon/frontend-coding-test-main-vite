@@ -1,46 +1,59 @@
 import { styled } from "styled-components";
-import useImageViewer from "../hooks/useImageViewer";
-import { ImageProps } from "../../global/types";
+import { ImageProps, StoreProps } from "../../global/types";
+import {
+  calcCurrentPosition,
+  calcInnerWindowSize,
+} from "../../utils/calcImageContainer";
+import { useSelector } from "react-redux";
 
 export default function ImageContainer({
   id,
+  classname,
   src,
   onClick,
-  absolutePos,
+  beforePos,
+  afterPos,
 }: {
   id: string;
+  classname?: string;
   src: string;
   onClick: ({
     imageUrl,
-    sizeAndPos,
+    beforePos,
+    afterPos,
   }: {
     imageUrl: string;
-    sizeAndPos: ImageProps;
+    beforePos: ImageProps;
+    afterPos: ImageProps;
   }) => void;
-  absolutePos?: {
-    isAbsolute?: boolean;
-    x?: number;
-    y?: number;
-    width?: number;
-    height?: number;
+  beforePos?: {
+    isAbsolute: boolean;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
   };
+  afterPos?: ImageProps;
 }) {
-  const { calcCurrentPosition } = useImageViewer();
+  const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
+  console.log("before: ", beforePos, "after", afterPos, isViewerEnabled);
 
   return (
     <>
       <ImageContainerWrapper
-        x={absolutePos?.x}
-        y={absolutePos?.y}
-        width={absolutePos?.width}
-        height={absolutePos?.height}
-        className={absolutePos?.isAbsolute ? "absolute" : "static"}
+        $beforePos={beforePos}
+        $afterPos={afterPos}
+        $isOpen={isViewerEnabled}
+        className={classname}
         onClick={(event: React.SyntheticEvent) => {
-          // event.target;
-          const sizeAndPos = calcCurrentPosition(event.target as Element);
+          const calcedBeforePos = calcCurrentPosition(event.target as Element);
+          const calcedAfterPos = calcInnerWindowSize(event.target as Element);
+
+          console.log(calcedBeforePos, calcedAfterPos);
           onClick({
             imageUrl: src,
-            sizeAndPos,
+            beforePos: calcedBeforePos,
+            afterPos: calcedAfterPos,
           });
         }}
       >
@@ -51,32 +64,50 @@ export default function ImageContainer({
 }
 
 export const ImageContainerWrapper = styled.div<{
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
+  $beforePos?: ImageProps & { isAbsolute: boolean };
+  $afterPos?: ImageProps;
+  $isOpen?: boolean;
 }>`
-  position: relative;
+  position: ${(props) =>
+    props.$beforePos?.isAbsolute ? "absolute" : "static"};
   background-color: #f5f5f5;
   font-size: 0;
   cursor: pointer;
   border-radius: 5px;
   overflow: hidden;
+  opacity: ${(props) =>
+    props.$isOpen
+      ? 0.5
+      : !props.$isOpen && !props.$beforePos?.isAbsolute
+      ? 1
+      : props.$beforePos?.isAbsolute
+      ? 0
+      : 1};
 
-  left: ${(props) => props.x}px;
-  top: ${(props) => props.y}px;
+  left: ${(props) => props.$beforePos?.x}px;
+  top: ${(props) => props.$beforePos?.y}px;
 
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
+  width: ${(props) => props.$beforePos?.width}px;
+  height: ${(props) => props.$beforePos?.height}px;
 
-  &.absolute {
-    position: absolute;
-    opacity: 0;
-    left: ${(props) => props.x}px;
-    top: ${(props) => props.y}px;
+  transition: all 350ms cubic-bezier(0.52, 0.13, 0.33, 1.05);
 
-    width: ${(props) => props.width}px;
-    height: ${(props) => props.height}px;
+  &.closed {
+    left: ${(props) => props.$afterPos?.x}px;
+    top: ${(props) => props.$afterPos?.y}px;
+
+    width: ${(props) => props.$afterPos?.width}px;
+    height: ${(props) => props.$afterPos?.height}px;
+  }
+
+  &.open {
+    opacity: 1;
+
+    left: ${(props) => props.$afterPos?.x}px;
+    top: ${(props) => props.$afterPos?.y}px;
+
+    width: ${(props) => props.$afterPos?.width}px;
+    height: ${(props) => props.$afterPos?.height}px;
   }
 
   & img {
@@ -84,3 +115,23 @@ export const ImageContainerWrapper = styled.div<{
     height: auto;
   }
 `;
+
+/* -webkit-animation: zoom 350ms cubic-bezier(0.52, 0.13, 0.33, 1.05) forwards;
+    animation: zoom 350ms cubic-bezier(0.52, 0.13, 0.33, 1.05) forwards; 
+
+    @keyframes zoom {
+      0% {
+        left: ${(props) => props.$beforePos?.x}px;
+        top: ${(props) => props.$beforePos?.y}px;
+
+        width: ${(props) => props.$beforePos?.width}px;
+        height: ${(props) => props.$beforePos?.height}px;
+      }
+      100% {
+        left: ${(props) => props.$afterPos?.x}px;
+        top: ${(props) => props.$afterPos?.y}px;
+
+        width: ${(props) => props.$afterPos?.width}px;
+        height: ${(props) => props.$afterPos?.height}px;
+      }
+    }*/

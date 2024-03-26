@@ -1,4 +1,4 @@
-import { StoreProps } from "../../global/types";
+import { ImageProps, StoreProps } from "../../global/types";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import ImageContainer from "../ImageContainer/ImageContainer";
@@ -6,29 +6,37 @@ import useImageViewer from "../hooks/useImageViewer";
 import ImageViewerBackdrop from "./ImageViewer.backdrop";
 
 export default function ImageViewer() {
-  const { imageUrl, imagePosAndSize } = useSelector(
+  const { imageUrl, imageBeforePosAndSize, imageAfterPosAndSize } = useSelector(
     (state: StoreProps) => state.viewer
   );
-  const { handleClick, isViewerEnabled } = useImageViewer();
-
+  const { handleZoomOut, isViewerEnabled } = useImageViewer();
+  console.log(imageBeforePosAndSize, imageAfterPosAndSize);
   return (
     <>
       <ViewerContainer
         className={isViewerEnabled ? "open" : "closed"}
         $enabled={isViewerEnabled}
+        $imageAfterPosAndSize={imageAfterPosAndSize}
       >
         <ImageViewerBackdrop />
         <ImageContainer
           id="view"
+          classname={isViewerEnabled ? "open" : "closed"}
           src={imageUrl}
-          onClick={handleClick}
-          absolutePos={{
+          onClick={() =>
+            handleZoomOut({
+              beforePos: imageAfterPosAndSize,
+              afterPos: imageBeforePosAndSize,
+            })
+          }
+          beforePos={{
             isAbsolute: true,
-            x: imagePosAndSize.x,
-            y: imagePosAndSize.y,
-            width: imagePosAndSize.width,
-            height: imagePosAndSize.height,
+            x: imageBeforePosAndSize.x,
+            y: imageBeforePosAndSize.y,
+            width: imageBeforePosAndSize.width,
+            height: imageBeforePosAndSize.height,
           }}
+          afterPos={imageAfterPosAndSize}
         />
       </ViewerContainer>
     </>
@@ -37,6 +45,7 @@ export default function ImageViewer() {
 
 const ViewerContainer = styled.div<{
   $enabled: boolean;
+  $imageAfterPosAndSize: ImageProps;
 }>`
   position: fixed;
   top: 0;
@@ -47,10 +56,6 @@ const ViewerContainer = styled.div<{
   pointer-events: ${(props) => (props.$enabled ? "auto" : "none")};
 
   &.open .backdrop {
-    opacity: 0.5;
-  }
-
-  &.open .absolute {
-    opacity: 1;
+    /* opacity: 0.5; */
   }
 `;

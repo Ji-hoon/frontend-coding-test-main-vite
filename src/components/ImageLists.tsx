@@ -12,6 +12,8 @@ import ImageContainer from "./ImageContainer/ImageContainer";
 import Loading from "./Loading/Loading";
 import { VALUES } from "../global/constants";
 import useImageViewer from "./hooks/useImageViewer";
+import { useDispatch } from "react-redux";
+import { imageViewerActions } from "../store/imageViewer.slice";
 
 export default function ImageList() {
   const {
@@ -24,9 +26,12 @@ export default function ImageList() {
     pageCount,
     setPageCount,
   } = useImageLists();
-  const { handleClick } = useImageViewer();
+  const { handleZoomIn } = useImageViewer();
+  const dispatch = useDispatch();
 
   const handleResize = throttle(() => {
+    dispatch(imageViewerActions.close());
+
     if (window.innerWidth > VALUES.BREAKPOINT_XLARGE) {
       setPageColumn(3);
     }
@@ -64,7 +69,7 @@ export default function ImageList() {
                 )
                   return (
                     <ImageContainer
-                      onClick={handleClick}
+                      onClick={handleZoomIn}
                       id={image.id}
                       key={index}
                       src={image.url}
@@ -83,7 +88,7 @@ export default function ImageList() {
                   )
                     return (
                       <ImageContainer
-                        onClick={handleClick}
+                        onClick={handleZoomIn}
                         id={image.id}
                         key={index}
                         src={image.url}
@@ -98,7 +103,7 @@ export default function ImageList() {
                   if ((index - 3) % 3 === 2 || index === 2)
                     return (
                       <ImageContainer
-                        onClick={handleClick}
+                        onClick={handleZoomIn}
                         id={image.id}
                         key={index}
                         src={image.url}

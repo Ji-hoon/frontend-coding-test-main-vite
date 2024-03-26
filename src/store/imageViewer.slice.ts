@@ -3,7 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialImageViewerState = {
   isViewerEnabled: false,
   imageUrl: "",
-  imagePosAndSize: {
+  imageBeforePosAndSize: {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  },
+  imageAfterPosAndSize: {
     x: 0,
     y: 0,
     width: 0,
@@ -18,17 +24,18 @@ const imageViewerSlice = createSlice({
     open(state, action) {
       state.isViewerEnabled = true;
       state.imageUrl = action.payload.src;
-      state.imagePosAndSize = action.payload.pos;
     },
     close(state) {
       state.isViewerEnabled = false;
-      state.imageUrl = "";
     },
     zoomIn(state, action) {
-      state.imagePosAndSize = action.payload.pos;
+      state.imageBeforePosAndSize = action.payload.beforePos;
+      state.imageAfterPosAndSize = action.payload.afterPos;
     },
     zoomOut(state, action) {
-      state.imagePosAndSize = action.payload.pos;
+      state.imageBeforePosAndSize = action.payload.beforePos;
+      state.imageAfterPosAndSize = action.payload.afterPos;
+      console.log(state);
     },
   },
 });

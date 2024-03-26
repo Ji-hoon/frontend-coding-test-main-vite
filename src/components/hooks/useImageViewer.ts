@@ -1,35 +1,48 @@
 import { useDispatch, useSelector } from "react-redux";
 import { imageViewerActions } from "../../store/imageViewer.slice";
 import { ImageProps, StoreProps } from "../../global/types";
+// import { useState } from "react";
 
 export default function useImageViewer() {
   const dispatch = useDispatch();
 
   const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
 
-  const handleClick = ({
+  const handleZoomIn = ({
     imageUrl,
-    sizeAndPos,
+    beforePos,
+    afterPos,
   }: {
     imageUrl?: string;
-    sizeAndPos?: ImageProps;
+    beforePos: ImageProps;
+    afterPos: ImageProps;
   }) => {
     if (!isViewerEnabled) {
-      dispatch(imageViewerActions.open({ src: imageUrl, pos: sizeAndPos }));
+      //   setAfterPos(beforePos);
+      console.log(beforePos, afterPos);
+      dispatch(imageViewerActions.open({ src: imageUrl }));
+      dispatch(imageViewerActions.zoomIn({ beforePos, afterPos }));
       return;
     }
-    dispatch(imageViewerActions.close());
   };
 
-  const calcCurrentPosition = (element: Element) => {
-    const offset = element.getBoundingClientRect();
-    return {
-      x: offset.left,
-      y: offset.top,
-      width: offset.width,
-      height: offset.height,
-    };
+  const handleZoomOut = ({
+    beforePos,
+    afterPos,
+  }: {
+    beforePos: ImageProps;
+    afterPos: ImageProps;
+  }) => {
+    dispatch(imageViewerActions.zoomOut({ beforePos, afterPos }));
+
+    setTimeout(() => {
+      dispatch(imageViewerActions.close());
+    }, 350);
   };
 
-  return { handleClick, calcCurrentPosition, isViewerEnabled };
+  return {
+    handleZoomIn,
+    handleZoomOut,
+    isViewerEnabled,
+  };
 }
