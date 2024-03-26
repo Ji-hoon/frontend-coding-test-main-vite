@@ -81,14 +81,16 @@ export const ImageContainerWrapper = styled.div<{
   width: ${(props) => props.$beforePos?.width}px;
   height: ${(props) => props.$beforePos?.height}px;
 
-  -webkit-transition: ${(props) =>
-    props.$beforePos?.isAbsolute
-      ? `all ${VALUES.ANIMATION_TIMING_SHORT}ms 0ms cubic-bezier(0.52, 0.13, 0.33, 1.05)`
-      : `opacity ${VALUES.ANIMATION_TIMING_SHORT}ms cubic-bezier(0.53, 0.15, 0.34, 1.01)`};
-  transition: ${(props) =>
-    props.$beforePos?.isAbsolute
-      ? `all ${VALUES.ANIMATION_TIMING_SHORT}ms 0ms cubic-bezier(0.52, 0.13, 0.33, 1.05)`
-      : `opacity ${VALUES.ANIMATION_TIMING_SHORT}ms cubic-bezier(0.53, 0.15, 0.34, 1.01)`};
+  -webkit-transition: all ${VALUES.ANIMATION_TIMING_SHORT}ms
+    cubic-bezier(0.52, 0.13, 0.33, 1.05);
+  transition: all ${VALUES.ANIMATION_TIMING_SHORT}ms
+    cubic-bezier(0.52, 0.13, 0.33, 1.05);
+
+  &:not(.open):not(.closed):hover {
+    transform: scale(1.02);
+    opacity: 0.9;
+    box-shadow: 0 1px 10px 3px rgba(0, 0, 0, 0.12);
+  }
 
   &.open,
   &.closed {
