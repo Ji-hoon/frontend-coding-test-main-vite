@@ -21,6 +21,7 @@ export const calcInnerWindowSize = (element: Element) => {
   const targetX = (windowWidth - targetWidth) / 2;
   const targetY = 0;
 
+  // TODO : 이미지 비율 계산 로직 구현
   // 이미지의 가로가 길면 윈도우 가로 너비를, 세로가 길면 윈도우 세로 높이를 할당한다.
   // 1. 가로가 긴 경우 targetWidth는 windowWidth 값을 할당하고,
   //    targetHeight값에는 targetWidth / offset.width 값을 나눈 값을 곱하여 할당한다.

@@ -33,4 +33,10 @@ export const DummyImageContainer = styled(ImageContainerWrapper)`
 
 export const ErrorContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 24px 32px;
+  border: 1px solid #ededed;
+  margin: 24px auto;
 `;

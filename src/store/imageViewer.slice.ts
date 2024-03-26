@@ -5,21 +5,21 @@ const initialImageViewerState = {
   isScrollable: true,
   imageUrl: "",
   imageBeforePosAndSize: {
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
+    x: undefined,
+    y: undefined,
+    width: undefined,
+    height: undefined,
   },
   imageAfterPosAndSize: {
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
+    x: undefined,
+    y: undefined,
+    width: undefined,
+    height: undefined,
   },
 };
 
 const imageViewerSlice = createSlice({
-  name: "authentication",
+  name: "imageViewer",
   initialState: initialImageViewerState,
   reducers: {
     open(state, action) {
@@ -38,6 +38,18 @@ const imageViewerSlice = createSlice({
     reset(state) {
       state.isViewerEnabled = false;
       state.isScrollable = true;
+      state.imageBeforePosAndSize = {
+        x: undefined,
+        y: undefined,
+        width: undefined,
+        height: undefined,
+      };
+      state.imageAfterPosAndSize = {
+        x: undefined,
+        y: undefined,
+        width: undefined,
+        height: undefined,
+      };
     },
   },
 });

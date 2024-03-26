@@ -28,13 +28,13 @@ export default function useImageLists() {
         if (response) {
           const imageHistory = [...imageElements];
           const prevImages = imageHistory.concat(response.data);
-          //   console.log(prevImages, imageHistory);
+
           setIsLoading(false);
           setImageElements(prevImages as unknown as imageType[]);
         }
       })
       .catch((error) => {
-        // error
+        // error handling
         console.log(error);
         setIsLoading(false);
         setIsError(true);

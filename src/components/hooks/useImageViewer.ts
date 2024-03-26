@@ -5,13 +5,7 @@ import { ImageProps, StoreProps } from "../../global/types";
 export default function useImageViewer() {
   const dispatch = useDispatch();
 
-  const {
-    imageUrl,
-    imageBeforePosAndSize,
-    imageAfterPosAndSize,
-    isViewerEnabled,
-    isScrollable,
-  } = useSelector((state: StoreProps) => state.viewer);
+  const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
 
   const handleZoomIn = ({
     imageUrl,
@@ -23,7 +17,6 @@ export default function useImageViewer() {
     afterPos: ImageProps;
   }) => {
     if (!isViewerEnabled) {
-      console.log("before: ", beforePos, "after", afterPos, isViewerEnabled);
       dispatch(imageViewerActions.open({ src: imageUrl, beforePos }));
       setTimeout(() => {
         dispatch(imageViewerActions.toggleZoom({ beforePos, afterPos }));
@@ -51,10 +44,6 @@ export default function useImageViewer() {
   return {
     handleZoomIn,
     handleZoomOut,
-    imageUrl,
-    imageBeforePosAndSize,
-    imageAfterPosAndSize,
     isViewerEnabled,
-    isScrollable,
   };
 }

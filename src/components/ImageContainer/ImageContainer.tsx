@@ -1,10 +1,10 @@
 import { styled } from "styled-components";
-import { ImageProps } from "../../global/types";
+import { ImageProps, StoreProps } from "../../global/types";
 import {
   calcCurrentPosition,
   calcInnerWindowSize,
 } from "../../utils/calcImageContainer";
-import useImageViewer from "../hooks/useImageViewer";
+import { useSelector } from "react-redux";
 
 export default function ImageContainer({
   id,
@@ -29,9 +29,7 @@ export default function ImageContainer({
   beforePos?: ImageProps & { isAbsolute: boolean };
   afterPos?: ImageProps;
 }) {
-  const { isViewerEnabled } = useImageViewer();
-
-  console.log("before: ", beforePos, "after", afterPos, isViewerEnabled);
+  const { isViewerEnabled } = useSelector((state: StoreProps) => state.viewer);
 
   return (
     <>
@@ -71,7 +69,7 @@ export const ImageContainerWrapper = styled.div<{
   overflow: hidden;
   opacity: ${(props) =>
     props.$isOpen
-      ? 0.5
+      ? 0.4
       : !props.$isOpen && !props.$beforePos?.isAbsolute
       ? 1
       : 0};
@@ -82,9 +80,13 @@ export const ImageContainerWrapper = styled.div<{
   width: ${(props) => props.$beforePos?.width}px;
   height: ${(props) => props.$beforePos?.height}px;
 
+  -webkit-transition: ${(props) =>
+    props.$beforePos?.isAbsolute
+      ? "all 300ms 0ms cubic-bezier(0.52, 0.13, 0.33, 1.05)"
+      : "opacity 250ms cubic-bezier(0.53, 0.15, 0.34, 1.01)"};
   transition: ${(props) =>
     props.$beforePos?.isAbsolute
-      ? "all 300ms cubic-bezier(0.52, 0.13, 0.33, 1.05)"
+      ? "all 300ms 0ms cubic-bezier(0.52, 0.13, 0.33, 1.05)"
       : "opacity 250ms cubic-bezier(0.53, 0.15, 0.34, 1.01)"};
 
   &.open,
@@ -105,23 +107,3 @@ export const ImageContainerWrapper = styled.div<{
     height: 100%;
   }
 `;
-
-/* -webkit-animation: zoom 350ms cubic-bezier(0.52, 0.13, 0.33, 1.05) forwards;
-    animation: zoom 350ms cubic-bezier(0.52, 0.13, 0.33, 1.05) forwards; 
-
-    @keyframes zoom {
-      0% {
-        left: ${(props) => props.$beforePos?.x}px;
-        top: ${(props) => props.$beforePos?.y}px;
-
-        width: ${(props) => props.$beforePos?.width}px;
-        height: ${(props) => props.$beforePos?.height}px;
-      }
-      100% {
-        left: ${(props) => props.$afterPos?.x}px;
-        top: ${(props) => props.$afterPos?.y}px;
-
-        width: ${(props) => props.$afterPos?.width}px;
-        height: ${(props) => props.$afterPos?.height}px;
-      }
-    }*/

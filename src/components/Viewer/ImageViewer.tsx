@@ -1,19 +1,20 @@
-import { ImageProps } from "../../global/types";
+import { ImageProps, StoreProps } from "../../global/types";
 import styled from "styled-components";
 import ImageContainer from "../ImageContainer/ImageContainer";
 import useImageViewer from "../hooks/useImageViewer";
 import ImageViewerBackdrop from "./ImageViewer.backdrop";
+import { useSelector } from "react-redux";
 
 export default function ImageViewer() {
+  const { handleZoomOut } = useImageViewer();
+
   const {
-    handleZoomOut,
     imageUrl,
     imageBeforePosAndSize,
     imageAfterPosAndSize,
-    isViewerEnabled,
     isScrollable,
-  } = useImageViewer();
-  console.log(imageBeforePosAndSize, imageAfterPosAndSize);
+    isViewerEnabled,
+  } = useSelector((state: StoreProps) => state.viewer);
 
   return (
     <>
@@ -23,25 +24,27 @@ export default function ImageViewer() {
         $imageAfterPosAndSize={imageAfterPosAndSize}
       >
         <ImageViewerBackdrop />
-        <ImageContainer
-          id="view"
-          classname={!isScrollable ? "open" : "closed"}
-          src={imageUrl}
-          onClick={() =>
-            handleZoomOut({
-              beforePos: imageAfterPosAndSize,
-              afterPos: imageBeforePosAndSize,
-            })
-          }
-          beforePos={{
-            isAbsolute: true,
-            x: imageBeforePosAndSize.x,
-            y: imageBeforePosAndSize.y,
-            width: imageBeforePosAndSize.width,
-            height: imageBeforePosAndSize.height,
-          }}
-          afterPos={imageAfterPosAndSize}
-        />
+        {!isScrollable && (
+          <ImageContainer
+            id="view"
+            classname={!isViewerEnabled ? "open" : "closed"}
+            src={imageUrl}
+            onClick={() =>
+              handleZoomOut({
+                beforePos: imageAfterPosAndSize,
+                afterPos: imageBeforePosAndSize,
+              })
+            }
+            beforePos={{
+              isAbsolute: true,
+              x: imageBeforePosAndSize.x,
+              y: imageBeforePosAndSize.y,
+              width: imageBeforePosAndSize.width,
+              height: imageBeforePosAndSize.height,
+            }}
+            afterPos={imageAfterPosAndSize}
+          />
+        )}
       </ViewerContainer>
     </>
   );

@@ -30,7 +30,7 @@ export default function ImageList() {
   const dispatch = useDispatch();
 
   const handleResize = throttle(() => {
-    dispatch(imageViewerActions.close());
+    dispatch(imageViewerActions.reset());
 
     if (window.innerWidth > VALUES.BREAKPOINT_XLARGE) {
       setPageColumn(3);
@@ -56,7 +56,10 @@ export default function ImageList() {
 
   return (
     <>
-      <button onClick={() => setPageCount(pageCount)}>새로고침</button>
+      <ErrorContainer>
+        <p>에러가 발생했습니다.</p>
+        <button onClick={() => setPageCount(pageCount)}>새로고침</button>
+      </ErrorContainer>
       <ImageListContainer>
         {imageElements.length > 0 && (
           <>
@@ -114,10 +117,12 @@ export default function ImageList() {
             )}
           </>
         )}
-        {isLoading && <Loading $init={pageCount === 0 ? true : false} />}
+        {isLoading && !isError && (
+          <Loading $init={pageCount === 0 ? true : false} />
+        )}
       </ImageListContainer>
 
-      {imageElements.length > 0 && !isLoading && (
+      {imageElements.length > 0 && !isLoading && !isError && (
         <DummyImageContainer ref={setTarget} />
       )}
 
