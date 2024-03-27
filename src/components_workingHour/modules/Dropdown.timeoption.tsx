@@ -33,6 +33,7 @@ export default function Dropdown_TimeOption({
             onClick={handleOptionClick}
             $isSelected={selected === item}
             key={index}
+            autoFocus={selected === item}
           >
             {item}
             {selected === item && <FiCheck strokeWidth={4} />}
