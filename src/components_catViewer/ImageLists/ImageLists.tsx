@@ -24,7 +24,6 @@ export default function ImageList() {
     isError,
     setTarget,
     pageCount,
-    setPageCount,
   } = useImageLists();
   const { handleZoomIn } = useImageViewer();
   const dispatch = useDispatch();
@@ -56,11 +55,6 @@ export default function ImageList() {
 
   return (
     <>
-      {/* test 용 코드 - TODO: 삭제 필요 
-      <ErrorContainer>
-        <p>에러가 발생했습니다.</p>
-        <button onClick={() => setPageCount(pageCount)}>새로고침</button>
-      </ErrorContainer>*/}
       {!isError && (
         <ImageListContainer>
           {imageElements.length > 0 && (
@@ -131,8 +125,10 @@ export default function ImageList() {
 
       {isError && (
         <ErrorContainer>
-          <p>에러가 발생했습니다.</p>
-          <button onClick={() => setPageCount(pageCount)}>새로고침</button>
+          <p>Fail to loading images.</p>
+          <button onClick={() => (location.href = "/cat-viewer")}>
+            Refresh
+          </button>
         </ErrorContainer>
       )}
     </>
