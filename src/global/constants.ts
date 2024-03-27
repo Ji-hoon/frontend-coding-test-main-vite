@@ -15,6 +15,7 @@ export const VALUES = {
   ANIMATION_TIMING_SHORT: 300,
   ANIMATION_DELAY_50: 50,
   ANIMATION_DELAY_100: 100,
+  DROPDOWN_MIN_HEIGHT: 200,
 };
 
 export const SIZES = {
@@ -26,7 +27,7 @@ export const SIZES = {
   XL: 24,
   XXL: 36,
   TITLE: 42,
-  MAX_WIDTH_INPUT: 240,
+  MAX_WIDTH_INPUT: 180,
   MAX_WIDTH_APP: 1200,
 };
 

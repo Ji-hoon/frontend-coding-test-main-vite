@@ -2,6 +2,7 @@ import { FiChevronDown } from "react-icons/fi";
 import styled from "styled-components";
 import { COLORS, SIZES, VALUES } from "../../global/constants";
 import Dropdown from "./Dropdown";
+import Dropdown_TimeOption from "./Dropdown.timeoption";
 
 export default function Input({ defaultValue }: { defaultValue: string }) {
   //   const timeOption = "09:00"; //TODO : default value를 props로 전달받도록 수정
@@ -13,7 +14,7 @@ export default function Input({ defaultValue }: { defaultValue: string }) {
         <FiChevronDown strokeWidth="3" />
       </SelectorInputContainer>
       <Dropdown>
-        <>import dropdown menu</>
+        <Dropdown_TimeOption selected="09:00" />
       </Dropdown>
     </>
   );
