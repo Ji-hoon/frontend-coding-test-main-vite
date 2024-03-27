@@ -39,7 +39,7 @@ const SelectorInput = styled.input`
   display: block;
   padding: ${SIZES.LG / 2}px ${SIZES.XL / 2}px;
   background-color: ${COLORS.BASIC_WHITE};
-  border: 1px solid ${COLORS.GRAY_01};
+  border: 1px solid ${COLORS.GRAY_02};
   color: ${COLORS.BASIC_BLACK};
   border-radius: 5px;
   outline: none;
@@ -48,7 +48,7 @@ const SelectorInput = styled.input`
   transition: all ${VALUES.ANIMATION_TIMING_SHORTER}ms ease-out;
 
   &:hover {
-    border-color: ${COLORS.GRAY_02};
+    border-color: ${COLORS.GRAY_03};
   }
   &.active,
   &:focus {

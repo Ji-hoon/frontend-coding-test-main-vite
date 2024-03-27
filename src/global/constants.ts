@@ -16,6 +16,7 @@ export const VALUES = {
   ANIMATION_DELAY_50: 50,
   ANIMATION_DELAY_100: 100,
   DROPDOWN_MIN_HEIGHT: 200,
+  FIELD_HEADING_MIN_WIDTH: 160,
 };
 
 export const SIZES = {
@@ -29,6 +30,7 @@ export const SIZES = {
   TITLE: 42,
   MAX_WIDTH_INPUT: 180,
   MAX_WIDTH_APP: 1200,
+  MAX_WIDTH_SETTING: 960,
 };
 
 export const COLORS = {

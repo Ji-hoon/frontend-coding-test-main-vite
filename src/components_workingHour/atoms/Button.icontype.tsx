@@ -3,10 +3,16 @@ import { COLORS, SIZES, TYPES } from "../../global/constants";
 import { FiPlus, FiTrash2 } from "react-icons/fi";
 import { BoxtypeButton } from "./Button.boxtype";
 
-export default function Button_Icontype({ type }: { type: string }) {
+export default function Button_Icontype({
+  type,
+  id,
+}: {
+  type: string;
+  id?: string;
+}) {
   return (
     <>
-      <IcontypeButton>
+      <IcontypeButton id={id}>
         {type === TYPES.ADD && <FiPlus size={SIZES.LG} />}
         {type === TYPES.DELETE && <FiTrash2 size={SIZES.LG} />}
       </IcontypeButton>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Input from "../atoms/Input";
-import { SIZES } from "../../global/constants";
+import { SIZES, TYPES } from "../../global/constants";
+import Button_Icontype from "../atoms/Button.icontype";
 
 export default function Range_Input() {
   return (
@@ -8,6 +9,9 @@ export default function Range_Input() {
       <Input defaultValue="09:00" />
       -
       <Input defaultValue="17:00" />
+      &nbsp;
+      <Button_Icontype type={TYPES.DELETE} />
+      <Button_Icontype type={TYPES.ADD} id={TYPES.ADD} />
     </RangeInputWrapper>
   );
 }

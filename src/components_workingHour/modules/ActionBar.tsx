@@ -1,15 +1,12 @@
 import styled from "styled-components";
 import Button_Boxtype from "../atoms/Button.boxtype";
 import { SIZES, TYPES } from "../../global/constants";
-import Button_Icontype from "../atoms/Button.icontype";
 
 export default function ActionBar() {
   return (
     <ActionBarWrapper>
       <Button_Boxtype type={TYPES.CONFIRM} label="Update" />
       <Button_Boxtype label="Cancel" />
-      <Button_Icontype type={TYPES.ADD} />
-      <Button_Icontype type={TYPES.DELETE} />
     </ActionBarWrapper>
   );
 }
