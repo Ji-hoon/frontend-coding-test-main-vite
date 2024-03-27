@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { ImageContainerWrapper } from "../ImageContainer/ImageContainer";
+import { COLORS } from "../../global/constants";
 
 export const ImageColumn = styled.div<{ $columnCount: number }>`
   display: flex;
@@ -39,4 +40,9 @@ export const ErrorContainer = styled.div`
   padding: 20px 24px 32px;
   border: 1px solid #ededed;
   margin: 24px auto;
+
+  & button {
+    background-color: ${COLORS.BRAND_DEFAULT};
+    color: ${COLORS.BASIC_WHITE};
+  }
 `;

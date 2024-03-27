@@ -56,38 +56,21 @@ export default function ImageList() {
 
   return (
     <>
+      {/* test 용 코드 - TODO: 삭제 필요 
       <ErrorContainer>
         <p>에러가 발생했습니다.</p>
         <button onClick={() => setPageCount(pageCount)}>새로고침</button>
-      </ErrorContainer>
-      <ImageListContainer>
-        {imageElements.length > 0 && (
-          <>
-            <ImageColumn $columnCount={pageColumn}>
-              {imageElements.map((image: imageType, index) => {
-                if (
-                  (pageColumn === 3 && (index - 3) % 3 === 0) ||
-                  (pageColumn === 2 && (index - 2) % 2 === 0) ||
-                  pageColumn === 1
-                )
-                  return (
-                    <ImageContainer
-                      onClick={handleZoomIn}
-                      id={image.id}
-                      key={index}
-                      src={image.url}
-                    />
-                  );
-              })}
-            </ImageColumn>
-            {pageColumn >= 2 && (
+      </ErrorContainer>*/}
+      {!isError && (
+        <ImageListContainer>
+          {imageElements.length > 0 && (
+            <>
               <ImageColumn $columnCount={pageColumn}>
                 {imageElements.map((image: imageType, index) => {
                   if (
-                    (pageColumn === 3 && (index - 3) % 3 === 1) ||
-                    index === 1 ||
-                    (pageColumn === 2 && (index - 2) % 2 === 1) ||
-                    index === 1
+                    (pageColumn === 3 && (index - 3) % 3 === 0) ||
+                    (pageColumn === 2 && (index - 2) % 2 === 0) ||
+                    pageColumn === 1
                   )
                     return (
                       <ImageContainer
@@ -99,28 +82,48 @@ export default function ImageList() {
                     );
                 })}
               </ImageColumn>
-            )}
-            {pageColumn >= 3 && (
-              <ImageColumn $columnCount={pageColumn}>
-                {imageElements.map((image: imageType, index) => {
-                  if ((index - 3) % 3 === 2 || index === 2)
-                    return (
-                      <ImageContainer
-                        onClick={handleZoomIn}
-                        id={image.id}
-                        key={index}
-                        src={image.url}
-                      />
-                    );
-                })}
-              </ImageColumn>
-            )}
-          </>
-        )}
-        {isLoading && !isError && (
-          <Loading $init={pageCount === 0 ? true : false} />
-        )}
-      </ImageListContainer>
+              {pageColumn >= 2 && (
+                <ImageColumn $columnCount={pageColumn}>
+                  {imageElements.map((image: imageType, index) => {
+                    if (
+                      (pageColumn === 3 && (index - 3) % 3 === 1) ||
+                      index === 1 ||
+                      (pageColumn === 2 && (index - 2) % 2 === 1) ||
+                      index === 1
+                    )
+                      return (
+                        <ImageContainer
+                          onClick={handleZoomIn}
+                          id={image.id}
+                          key={index}
+                          src={image.url}
+                        />
+                      );
+                  })}
+                </ImageColumn>
+              )}
+              {pageColumn >= 3 && (
+                <ImageColumn $columnCount={pageColumn}>
+                  {imageElements.map((image: imageType, index) => {
+                    if ((index - 3) % 3 === 2 || index === 2)
+                      return (
+                        <ImageContainer
+                          onClick={handleZoomIn}
+                          id={image.id}
+                          key={index}
+                          src={image.url}
+                        />
+                      );
+                  })}
+                </ImageColumn>
+              )}
+            </>
+          )}
+          {isLoading && !isError && (
+            <Loading $init={pageCount === 0 ? true : false} />
+          )}
+        </ImageListContainer>
+      )}
 
       {imageElements.length > 0 && !isLoading && !isError && (
         <DummyImageContainer ref={setTarget} />
