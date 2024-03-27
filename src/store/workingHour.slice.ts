@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ACTIONS, DAYS, TIMES, TYPES } from "../global/constants";
+import { validateTimeRange } from "../utils/calcTimeOptions";
 
 // object in array
 // e.g. times: [ {from: "09:00", to: "17:00"}, {from: "17:15", to: "17:30"}, { ... } ]
@@ -8,34 +9,49 @@ const initialWorkingHourState = {
   hours: [
     {
       day: DAYS.SUN,
-      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
+      times: [
+        { from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER, isValid: true },
+      ],
     },
     {
       day: DAYS.MON,
-      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
+      times: [
+        { from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER, isValid: true },
+      ],
     },
     {
       day: DAYS.TUE,
-      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
+      times: [
+        { from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER, isValid: true },
+      ],
     },
     {
       day: DAYS.WED,
-      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
+      times: [
+        { from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER, isValid: true },
+      ],
     },
     {
       day: DAYS.THU,
-      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
+      times: [
+        { from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER, isValid: true },
+      ],
     },
     {
       day: DAYS.FRI,
-      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
+      times: [
+        { from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER, isValid: true },
+      ],
     },
     {
       day: DAYS.SAT,
-      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
+      times: [
+        { from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER, isValid: true },
+      ],
     },
   ],
   isModified: false,
+  isAvailable: true,
   isSyncedWithLocalStorage: false,
   isDropdownOpen: false,
   dropdownPos: {
@@ -77,6 +93,14 @@ const workingHourSlice = createSlice({
         if (order === TYPES.TIME_TO) {
           targetDay[0].times[id].to = action.payload.time;
         }
+
+        const isValidTimeRange = validateTimeRange({
+          order,
+          startTime: targetDay[0].times[id].from,
+          endTime: targetDay[0].times[id].to,
+        });
+        targetDay[0].times[id].isValid = isValidTimeRange.result;
+        state.isAvailable = isValidTimeRange.result;
       }
 
       state.hours = newHours;

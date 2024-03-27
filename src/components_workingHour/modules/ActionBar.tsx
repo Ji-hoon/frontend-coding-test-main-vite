@@ -2,9 +2,12 @@ import styled from "styled-components";
 import Button_Boxtype from "../atoms/Button.boxtype";
 import { SIZES, TYPES } from "../../global/constants";
 import { useWorkingHours } from "../hooks/useWorkingHours";
+import { useSelector } from "react-redux";
+import { StoreProps } from "../../global/types";
 
 export default function ActionBar() {
   const { resetHours, updateHours } = useWorkingHours();
+  const { isAvailable } = useSelector((state: StoreProps) => state.workingHour);
 
   return (
     <ActionBarWrapper>
@@ -12,6 +15,7 @@ export default function ActionBar() {
         onClick={updateHours}
         type={TYPES.CONFIRM}
         label="Update"
+        disabled={!isAvailable}
       />
       <Button_Boxtype onClick={resetHours} label="Cancel" />
     </ActionBarWrapper>

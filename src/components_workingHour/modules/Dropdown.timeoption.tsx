@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { DropdownTriggerPosAndSize, StoreProps } from "../../global/types";
 import { generateTimeOptions } from "../../utils/calcTimeOptions";
 import { useDropdown } from "../hooks/useDropdown";
+import React from "react";
 
 export default function Dropdown_TimeOption({
   selected,
@@ -19,12 +20,17 @@ export default function Dropdown_TimeOption({
   });
   const { clickTimeOption } = useDropdown();
 
+  const handleOptionClick = (event: React.SyntheticEvent) => {
+    const selectedOption = event.target as Element;
+    clickTimeOption(selectedOption);
+  };
+
   return (
     <DropdownMenuListWrapper $pos={dropdownPos}>
       {optionItems.map((item, index) => {
         return (
           <OptionItems
-            onClick={clickTimeOption}
+            onClick={handleOptionClick}
             $isSelected={selected === item}
             key={index}
           >

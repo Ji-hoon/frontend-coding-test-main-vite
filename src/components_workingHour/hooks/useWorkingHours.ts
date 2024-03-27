@@ -30,7 +30,7 @@ export function useWorkingHours() {
     dispatch(
       workingHourActions.updateTimeRange({
         day,
-        time: newTime,
+        time: { ...newTime, isValid: true },
         type: ACTIONS.ADD,
       })
     );

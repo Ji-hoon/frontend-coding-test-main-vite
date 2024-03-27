@@ -6,14 +6,16 @@ export default function Button_Boxtype({
   label,
   type,
   onClick,
+  disabled,
 }: {
   label: string;
   type?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }) {
   return (
     <>
-      <BoxtypeButton onClick={onClick} $type={type}>
+      <BoxtypeButton onClick={onClick} $type={type} disabled={disabled}>
         {label}
       </BoxtypeButton>
     </>
@@ -33,14 +35,22 @@ export const BoxtypeButton = styled.button<{
 
   transition: all ${VALUES.ANIMATION_TIMING_SHORT}ms ease-out;
 
-  &:hover {
+  &:not([disabled]) {
+    &:hover {
+      border-color: transparent;
+      filter: brightness(0.94);
+    }
+    &:active {
+      filter: brightness(0.9);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &[disabled] {
+    background-color: ${COLORS.GRAY_05};
     border-color: transparent;
-    filter: brightness(0.94);
-  }
-  &:active {
-    filter: brightness(0.9);
-  }
-  &:focus {
-    outline: none;
+    cursor: not-allowed;
   }
 `;

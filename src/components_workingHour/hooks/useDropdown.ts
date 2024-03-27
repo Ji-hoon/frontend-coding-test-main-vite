@@ -33,9 +33,9 @@ export function useDropdown() {
     dispatch(workingHourActions.closeDropdown());
   };
 
-  const clickTimeOption = (event: React.SyntheticEvent) => {
-    const selectedOption = event.target as Element;
+  const clickTimeOption = (selectedOption: Element) => {
     const selectedTimeValue = selectedOption.textContent;
+
     dispatch(
       workingHourActions.updateTimeRange({
         day: selectedDay,

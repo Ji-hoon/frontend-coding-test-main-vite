@@ -27,6 +27,7 @@ export default function Range_Input({
           <Input
             id={`${day}_${id}_${TYPES.TIME_FROM}_${time.from}`}
             defaultValue={time.from}
+            isValid={time.isValid}
             onClick={(event: React.SyntheticEvent) =>
               clickSelectorInput({
                 id,
@@ -37,10 +38,11 @@ export default function Range_Input({
               })
             }
           />
-          -
+          <p>-</p>
           <Input
             id={`${day}_${id}_${TYPES.TIME_TO}_${time.to}`}
             defaultValue={time.to}
+            isValid={time.isValid}
             onClick={(event: React.SyntheticEvent) =>
               clickSelectorInput({
                 id,
@@ -71,5 +73,10 @@ export default function Range_Input({
 const RangeInputWrapper = styled.div`
   display: flex;
   gap: ${SIZES.XXS / 2}px;
-  align-items: center;
+  align-items: flex-start;
+
+  & p {
+    line-height: 42px;
+    margin: 0;
+  }
 `;

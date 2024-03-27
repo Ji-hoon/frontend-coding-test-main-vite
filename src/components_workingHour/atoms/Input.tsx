@@ -6,10 +6,12 @@ import { StoreProps } from "../../global/types";
 
 export default function Input({
   defaultValue,
+  isValid,
   onClick,
   id,
 }: {
   defaultValue: string;
+  isValid: boolean;
   onClick: (e: React.SyntheticEvent) => void;
   id: string;
 }) {
@@ -27,21 +29,40 @@ export default function Input({
   };
 
   return (
-    <>
+    <SelectInputWrapper>
       <SelectorInputContainer>
         <SelectorInput
           id={id}
           onChange={handleOnchage}
-          className={isDropdownOpen && id === currentDropdownId ? "focus" : ""}
+          className={
+            isDropdownOpen && id === currentDropdownId
+              ? "focus"
+              : !isValid && currentDropdownId
+              ? "error"
+              : ""
+          }
           onClick={onClick}
           type="text"
           value={id === currentDropdownId ? selectedTime : defaultValue}
         />
         <FiChevronDown strokeWidth="3" />
       </SelectorInputContainer>
-    </>
+      {!isValid && <span>Invalid Time</span>}
+    </SelectInputWrapper>
   );
 }
+
+const SelectInputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: ${SIZES.XXS / 3}px;
+
+  & span {
+    font-size: 14px;
+    color: ${COLORS.VARIATION_RED};
+  }
+`;
 
 const SelectorInputContainer = styled.div`
   position: relative;
@@ -77,5 +98,10 @@ const SelectorInput = styled.input`
   &.active,
   &:focus {
     border-color: ${COLORS.BRAND_DEFAULT};
+    box-shadow: 0 0 0 1px ${COLORS.BRAND_DEFAULT};
+  }
+
+  &.error {
+    border-color: ${COLORS.VARIATION_RED};
   }
 `;

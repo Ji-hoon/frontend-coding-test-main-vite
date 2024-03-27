@@ -20,6 +20,7 @@ export type StoreProps = {
   workingHour: {
     hours: WorkingHourType[];
     isModified: boolean;
+    isAvailable: boolean;
     isSyncedWithLocalStorage: boolean;
     isDropdownOpen: boolean;
     dropdownPos: DropdownTriggerPosAndSize;
@@ -45,6 +46,7 @@ export type WorkingHourType = {
 export type TimeRangeType = {
   from: string;
   to: string;
+  isValid: boolean;
 };
 
 export type DropdownTriggerPosAndSize = {

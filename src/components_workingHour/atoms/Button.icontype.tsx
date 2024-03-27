@@ -26,5 +26,5 @@ export default function Button_Icontype({
 const IcontypeButton = styled(BoxtypeButton)`
   background-color: ${COLORS.BASIC_WHITE};
   color: ${COLORS.GRAY_08};
-  padding: ${SIZES.SM / 2}px;
+  padding: ${SIZES.XXS - 2}px;
 `;

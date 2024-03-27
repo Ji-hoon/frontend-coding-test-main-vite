@@ -63,9 +63,9 @@ export const ACTIONS = {
 };
 
 export const COLORS = {
-  BRAND_DEEP: "#7552F6",
-  BRAND_DEFAULT: "#7552F6",
-  BRAND_LIGHT: "#7552F6",
+  BRAND_DEEP: "#283cfa",
+  BRAND_DEFAULT: "#283cfa",
+  BRAND_LIGHT: "#283cfa",
   BASIC_WHITE: "#FFFFFF",
   BASIC_BLACK: "#000000",
   VARIATION_RED: "#EB5151",
