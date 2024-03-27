@@ -23,6 +23,8 @@ const ActionBarWrapper = styled.div`
   gap: ${SIZES.XS / 2}px;
   padding: ${SIZES.SM}px;
   flex-direction: row-reverse;
+  height: 75px;
+  box-sizing: border-box;
 
   position: sticky;
   bottom: 0;

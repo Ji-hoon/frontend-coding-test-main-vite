@@ -3,6 +3,7 @@ import Setting_Page from "../components_workingHour/Setting.page";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreProps, WorkingHourType } from "../global/types";
 import { workingHourActions } from "../store/workingHour.slice";
+import { useLayoutEffect } from "react";
 
 export type workingOurLoaderType = {
   result: WorkingHourType[];
@@ -15,21 +16,24 @@ function WorkingHours() {
   );
   const { result } = useLoaderData() as workingOurLoaderType;
 
-  console.log(result);
-  if (Object.keys(result).length === 0 && !isSyncedWithLocalStorage) {
-    localStorage.setItem("workingHour", JSON.stringify(hours));
-    dispatch(workingHourActions.setSync());
-  }
+  useLayoutEffect(() => {
+    console.log(result);
+    if (Object.keys(result).length === 0 && !isSyncedWithLocalStorage) {
+      localStorage.setItem("workingHour", JSON.stringify(hours));
+      dispatch(workingHourActions.setSync());
+    }
 
-  if (Object.keys(result).length > 0 && !isSyncedWithLocalStorage) {
-    dispatch(workingHourActions.setHours({ hours: result }));
-    console.log("synced");
-  }
+    if (Object.keys(result).length > 0 && !isSyncedWithLocalStorage) {
+      dispatch(workingHourActions.setHours({ hours: result }));
+      console.log("synced");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <h2>2번 과제 - WorkingHours</h2>
-      <Setting_Page hours={hours} />
+      {isSyncedWithLocalStorage && <Setting_Page hours={hours} />}
     </>
   );
 }

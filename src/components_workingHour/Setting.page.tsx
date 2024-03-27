@@ -10,7 +10,7 @@ export default function Setting_Page({ hours }: { hours: WorkingHourType[] }) {
   const { isModified } = useSelector((state: StoreProps) => state.workingHour);
 
   return (
-    <PageWrapper>
+    <PageWrapper $isModified={isModified}>
       {hours.map((hour, index) => {
         return <TimeField name={hour.day} key={index} times={hour.times} />;
       })}
@@ -20,7 +20,7 @@ export default function Setting_Page({ hours }: { hours: WorkingHourType[] }) {
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-const PageWrapper = styled.section`
+const PageWrapper = styled.section<{ $isModified: boolean }>`
   max-width: ${SIZES.MAX_WIDTH_SETTING}px;
-  margin: 0 auto 60px;
+  margin: 0 auto ${(props) => (props.$isModified ? 0 : 75)}px;
 `;

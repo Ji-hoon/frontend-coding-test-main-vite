@@ -8,7 +8,7 @@ const initialWorkingHourState = {
   hours: [
     {
       day: DAYS.SUN,
-      times: [],
+      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
     },
     {
       day: DAYS.MON,
@@ -20,11 +20,7 @@ const initialWorkingHourState = {
     },
     {
       day: DAYS.WED,
-      times: [
-        { from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER },
-        { from: "18:00", to: "20:00" },
-        // { from: "21:00", to: "23:00" },
-      ],
+      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
     },
     {
       day: DAYS.THU,
@@ -32,11 +28,11 @@ const initialWorkingHourState = {
     },
     {
       day: DAYS.FRI,
-      times: [], //[{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
+      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
     },
     {
       day: DAYS.SAT,
-      times: [], //[{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
+      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
     },
   ],
   isModified: false,
