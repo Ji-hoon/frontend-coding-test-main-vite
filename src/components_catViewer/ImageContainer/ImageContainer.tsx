@@ -86,10 +86,15 @@ export const ImageContainerWrapper = styled.div<{
   transition: all ${VALUES.ANIMATION_TIMING_SHORT}ms
     cubic-bezier(0.52, 0.13, 0.33, 1.05);
 
-  &:not(.open):not(.closed):hover {
-    transform: scale(1.02);
-    opacity: 0.9;
-    box-shadow: 0 1px 10px 3px rgba(0, 0, 0, 0.12);
+  &:not(.open):not(.closed) {
+    &:hover {
+      transform: scale(1.02);
+      opacity: 0.9;
+      box-shadow: 0 1px 10px 3px rgba(0, 0, 0, 0.12);
+    }
+    &:active {
+      transform: scale(1);
+    }
   }
 
   &.open,
