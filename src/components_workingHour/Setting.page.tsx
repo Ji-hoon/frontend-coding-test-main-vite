@@ -1,19 +1,19 @@
 import styled from "styled-components";
 import ActionBar from "./modules/ActionBar";
-import TimeField from "./modules/Field";
+import TimeField from "./modules/TimeField";
 import { SIZES } from "../global/constants";
+import { useSelector } from "react-redux";
+import { StoreProps } from "../global/types";
 
 // 2번 과제 최상위 설정 페이지
 export default function Setting_Page() {
+  const { hours } = useSelector((state: StoreProps) => state.workingHour);
+
   return (
     <PageWrapper>
-      <TimeField name="Sunday" />
-      <TimeField name="Monday" />
-      <TimeField name="Tuesday" />
-      <TimeField name="Wednesday" />
-      <TimeField name="Thursday" />
-      <TimeField name="Friday" />
-      <TimeField name="Saturday" />
+      {hours.map((hour, index) => {
+        return <TimeField name={hour.day} key={index} times={hour.times} />;
+      })}
       <ActionBar />
     </PageWrapper>
   );

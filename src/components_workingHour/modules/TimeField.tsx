@@ -1,22 +1,27 @@
 import styled from "styled-components";
 import Range_Input from "./RangeInput";
 import { COLORS, SIZES, VALUES, TYPES } from "../../global/constants";
-import Button_Icontype from "../atoms/Button.icontype";
+import { TimeRangeType } from "../../global/types";
 
-export default function TimeField({ name }: { name: string }) {
-  const hasTimeRange = true;
+export default function TimeField({
+  name,
+  times,
+}: {
+  name: string;
+  times: TimeRangeType[] | undefined;
+}) {
+  const isEmpty = times?.length === 0;
+  console.log(name, times, isEmpty);
 
   return (
     <FieldContainer>
       <h4>{name}</h4>
-      {hasTimeRange ? (
-        <TimesList>
-          <Range_Input />
-          <Range_Input />
-        </TimesList>
-      ) : (
-        <Button_Icontype type={TYPES.ADD} id={TYPES.ADD} />
-      )}
+      <TimesList>
+        {times?.map((time, index) => (
+          <Range_Input time={time} key={index} />
+        ))}
+        {isEmpty && <Range_Input isEmpty={isEmpty} />}
+      </TimesList>
     </FieldContainer>
   );
 }

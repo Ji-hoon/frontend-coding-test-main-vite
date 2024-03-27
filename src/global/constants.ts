@@ -33,6 +33,15 @@ export const SIZES = {
   MAX_WIDTH_SETTING: 960,
 };
 
+export const DAYS = {
+  MON: "Monday",
+  TUE: "Tuesday",
+  WED: "Wednesday",
+  THU: "Thursday",
+  FRI: "Friday",
+  SAT: "Saturday",
+  SUN: "Sunday",
+};
 export const COLORS = {
   BRAND_DEEP: "#7552F6",
   BRAND_DEFAULT: "#7552F6",

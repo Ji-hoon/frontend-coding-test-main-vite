@@ -17,6 +17,10 @@ export type StoreProps = {
     imageBeforePosAndSize: ImageProps;
     imageAfterPosAndSize: ImageProps;
   };
+  workingHour: {
+    hours: WorkingHourType[];
+    isModified: boolean;
+  };
 };
 
 export type ImageProps = {
@@ -24,4 +28,14 @@ export type ImageProps = {
   y: number | undefined;
   width: number | undefined;
   height: number | undefined;
+};
+
+export type WorkingHourType = {
+  day: string;
+  times: TimeRangeType[] | [];
+};
+
+export type TimeRangeType = {
+  from: string;
+  to: string;
 };
