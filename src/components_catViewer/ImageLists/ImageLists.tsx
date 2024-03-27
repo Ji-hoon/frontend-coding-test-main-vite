@@ -125,7 +125,7 @@ export default function ImageList() {
 
       {isError && (
         <ErrorContainer>
-          <p>Fail to loading images.</p>
+          <p>Failed to loading images. Please try again later.</p>
           <button onClick={() => (location.href = "/cat-viewer")}>
             Refresh
           </button>
