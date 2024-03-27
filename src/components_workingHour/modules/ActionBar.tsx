@@ -28,6 +28,10 @@ const ActionBarWrapper = styled.div`
 
   position: sticky;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.88) 10%,
+    rgba(255, 255, 255, 0.96) 100%
+  );
 `;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLORS, SIZES, TIMES, VALUES } from "../../global/constants";
+import { COLORS, SIZES, TIMES } from "../../global/constants";
 import { BoxtypeButton } from "../atoms/Button.boxtype";
 import { FiCheck } from "react-icons/fi";
 import { useSelector } from "react-redux";
@@ -46,7 +46,7 @@ const DropdownMenuListWrapper = styled.div<{
   padding: ${SIZES.XXS / 3}px 0;
 
   position: absolute;
-  width: 180px;
+  max-width: ${SIZES.MAX_WIDTH_OPTION_INPUT}px;
   box-sizing: border-box;
   border: 1px solid ${COLORS.GRAY_02_OVERAY};
   border-radius: 5px;
@@ -54,14 +54,14 @@ const DropdownMenuListWrapper = styled.div<{
   background: ${COLORS.BASIC_WHITE};
   box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.1);
 
-  max-height: ${VALUES.DROPDOWN_MIN_HEIGHT}px;
-  /* min-height: ${VALUES.DROPDOWN_MIN_HEIGHT}px; */
+  max-height: ${SIZES.DROPDOWN_MIN_HEIGHT}px;
   overflow-x: hidden;
   overflow-y: auto;
 
   top: ${(props) => props.$pos.y + props.$pos.height + SIZES.XXS / 3}px;
   left: ${(props) => props.$pos.x}px;
   bottom: ${SIZES.XL}px;
+  width: ${(props) => props.$pos.width}px;
 `;
 
 // eslint-disable-next-line react-refresh/only-export-components

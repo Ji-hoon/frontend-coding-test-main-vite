@@ -23,10 +23,7 @@ export default function Input({
   const currentDropdownId = `${selectedDay}_${selectedTimeId}_${selectedTimeOrder}_${selectedTime}`;
 
   const handleOnchage = () => {
-    if (id === currentDropdownId) {
-      return selectedTime;
-    }
-    return defaultValue;
+    console.log("changed");
   };
 
   return (
@@ -34,11 +31,11 @@ export default function Input({
       <SelectorInputContainer>
         <SelectorInput
           id={id}
+          onChange={handleOnchage}
           className={isDropdownOpen && id === currentDropdownId ? "focus" : ""}
           onClick={onClick}
           type="text"
-          defaultValue={defaultValue}
-          value={handleOnchage()}
+          value={id === currentDropdownId ? selectedTime : defaultValue}
         />
         <FiChevronDown strokeWidth="3" />
       </SelectorInputContainer>
@@ -49,7 +46,7 @@ export default function Input({
 const SelectorInputContainer = styled.div`
   position: relative;
   display: flex;
-  max-width: ${SIZES.MAX_WIDTH_INPUT}px;
+  max-width: ${SIZES.MAX_WIDTH_OPTION_INPUT}px;
 
   & > svg {
     position: absolute;

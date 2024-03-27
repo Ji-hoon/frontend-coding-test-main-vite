@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Range_Input from "./RangeInput";
-import { COLORS, SIZES, VALUES, TYPES } from "../../global/constants";
+import { COLORS, SIZES, TYPES } from "../../global/constants";
 import { TimeRangeType } from "../../global/types";
 
 export default function TimeField({
@@ -44,7 +44,8 @@ const FieldContainer = styled.div`
   border-bottom: 1px solid ${COLORS.GRAY_01_OVERAY};
 
   & h4 {
-    width: ${VALUES.FIELD_HEADING_MIN_WIDTH}px;
+    width: 20vw;
+    max-width: ${SIZES.FIELD_HEADING_MIN_WIDTH}px;
     flex-shrink: 1;
     text-align: left;
     margin: 0;
@@ -60,7 +61,8 @@ const TimesList = styled.div`
 
   & > div:not(:last-child) {
     #${TYPES.ADD} {
-      display: none;
+      visibility: hidden;
+      pointer-events: none;
     }
   }
 `;
