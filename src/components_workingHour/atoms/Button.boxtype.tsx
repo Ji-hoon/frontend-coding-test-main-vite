@@ -5,13 +5,17 @@ import { COLORS, TYPES, VALUES } from "../../global/constants";
 export default function Button_Boxtype({
   label,
   type,
+  onClick,
 }: {
   label: string;
   type?: string;
+  onClick?: () => void;
 }) {
   return (
     <>
-      <BoxtypeButton $type={type}>{label}</BoxtypeButton>
+      <BoxtypeButton onClick={onClick} $type={type}>
+        {label}
+      </BoxtypeButton>
     </>
   );
 }

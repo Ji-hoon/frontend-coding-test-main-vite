@@ -75,6 +75,7 @@ export const ImageContainerWrapper = styled.div<{
       ? 1
       : 0};
 
+  min-height: ${VALUES.IMAGE_MIN_HEIGHT}px;
   left: ${(props) => props.$beforePos?.x}px;
   top: ${(props) => props.$beforePos?.y}px;
 

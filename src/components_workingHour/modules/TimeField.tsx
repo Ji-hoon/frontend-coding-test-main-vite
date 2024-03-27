@@ -11,7 +11,6 @@ export default function TimeField({
   times: TimeRangeType[] | [];
 }) {
   const isEmpty = times?.length === 0;
-  // console.log(name, times, isEmpty);
 
   return (
     <FieldContainer>
@@ -45,7 +44,8 @@ const FieldContainer = styled.div`
   border-bottom: 1px solid ${COLORS.GRAY_01_OVERAY};
 
   & h4 {
-    min-width: ${VALUES.FIELD_HEADING_MIN_WIDTH}px;
+    width: ${VALUES.FIELD_HEADING_MIN_WIDTH}px;
+    flex-shrink: 1;
     text-align: left;
     margin: 0;
     align-self: flex-start;

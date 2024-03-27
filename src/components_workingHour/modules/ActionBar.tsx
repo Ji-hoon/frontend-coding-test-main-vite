@@ -1,12 +1,19 @@
 import styled from "styled-components";
 import Button_Boxtype from "../atoms/Button.boxtype";
 import { SIZES, TYPES } from "../../global/constants";
+import { useWorkingHours } from "../hooks/useWorkingHours";
 
 export default function ActionBar() {
+  const { resetHours, updateHours } = useWorkingHours();
+
   return (
     <ActionBarWrapper>
-      <Button_Boxtype type={TYPES.CONFIRM} label="Update" />
-      <Button_Boxtype label="Cancel" />
+      <Button_Boxtype
+        onClick={updateHours}
+        type={TYPES.CONFIRM}
+        label="Update"
+      />
+      <Button_Boxtype onClick={resetHours} label="Cancel" />
     </ActionBarWrapper>
   );
 }

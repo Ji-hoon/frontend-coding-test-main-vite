@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLORS, SIZES, VALUES } from "../../global/constants";
-import { BoxtypeButton } from "./Button.boxtype";
+import { BoxtypeButton } from "../atoms/Button.boxtype";
 
 export default function Dropdown_TimeOption({
   selected,

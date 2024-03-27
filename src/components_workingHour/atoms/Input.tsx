@@ -1,26 +1,34 @@
 import { FiChevronDown } from "react-icons/fi";
 import styled from "styled-components";
 import { COLORS, SIZES, VALUES } from "../../global/constants";
-import Dropdown from "./Dropdown";
-import Dropdown_TimeOption from "./Dropdown.timeoption";
+import Dropdown from "../modules/Dropdown";
+import Dropdown_TimeOption from "../modules/Dropdown.timeoption";
 
-export default function Input({ defaultValue }: { defaultValue?: string }) {
-  //TODO : selected value를 props로 전달받도록 수정
+export default function Input({
+  defaultValue,
+  selectedValue,
+}: {
+  defaultValue?: string;
+  selectedValue?: string;
+}) {
+  // TODO : selected value를 props로 전달받도록 수정
+  // TODO : Dropdown 컴포넌트를 Input이 아닌 다른 곳으로 이동 or 포탈만 가져와서 Children으로 넣기
   const handleOnchange = () => {
     console.log("input changed");
   };
+
   return (
     <>
       <SelectorInputContainer>
         <SelectorInput
           onChange={handleOnchange}
           type="text"
-          value={defaultValue}
+          defaultValue={defaultValue}
         />
         <FiChevronDown strokeWidth="3" />
       </SelectorInputContainer>
       <Dropdown>
-        <Dropdown_TimeOption selected="09:00" />
+        {selectedValue && <Dropdown_TimeOption selected="09:00" />}
       </Dropdown>
     </>
   );

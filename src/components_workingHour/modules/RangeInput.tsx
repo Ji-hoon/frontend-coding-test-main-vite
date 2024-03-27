@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import Input from "../atoms/Input";
-import { ACTIONS, SIZES, TIMES, TYPES } from "../../global/constants";
-import Button_Icontype from "../atoms/Button.icontype";
+import { SIZES, TYPES } from "../../global/constants";
 import { TimeRangeType } from "../../global/types";
-import { useDispatch } from "react-redux";
-import { workingHourActions } from "../../store/workingHour.slice";
-import { calcNextTimes } from "../../utils/calcNextTimes";
+import { useWorkingHours } from "../hooks/useWorkingHours";
+import Input from "../atoms/Input";
+import Button_Icontype from "../atoms/Button.icontype";
 
 export default function Range_Input({
   id,
@@ -18,27 +16,7 @@ export default function Range_Input({
   time?: TimeRangeType;
   isEmpty?: boolean;
 }) {
-  const dispatch = useDispatch();
-
-  const handleDelete = () => {
-    dispatch(
-      workingHourActions.updateTimeRange({ day, id, type: ACTIONS.DEL })
-    );
-  };
-
-  const handleAdd = () => {
-    const newTime = isEmpty
-      ? { from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }
-      : calcNextTimes(time?.to);
-
-    dispatch(
-      workingHourActions.updateTimeRange({
-        day,
-        time: newTime,
-        type: ACTIONS.ADD,
-      })
-    );
-  };
+  const { addTimeRange, deleteTimeRange } = useWorkingHours();
 
   return (
     <RangeInputWrapper>
@@ -48,10 +26,17 @@ export default function Range_Input({
           -
           <Input defaultValue={time?.to} />
           &nbsp;
-          <Button_Icontype onClick={handleDelete} type={TYPES.DELETE} />
+          <Button_Icontype
+            onClick={() => deleteTimeRange({ day, id })}
+            type={TYPES.DELETE}
+          />
         </>
       )}
-      <Button_Icontype onClick={handleAdd} type={TYPES.ADD} id={TYPES.ADD} />
+      <Button_Icontype
+        onClick={() => addTimeRange({ day, time, isEmpty })}
+        type={TYPES.ADD}
+        id={TYPES.ADD}
+      />
     </RangeInputWrapper>
   );
 }

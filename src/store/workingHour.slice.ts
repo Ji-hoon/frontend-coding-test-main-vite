@@ -23,7 +23,7 @@ const initialWorkingHourState = {
       times: [
         { from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER },
         { from: "18:00", to: "20:00" },
-        { from: "21:00", to: "23:00" },
+        // { from: "21:00", to: "23:00" },
       ],
     },
     {
@@ -32,7 +32,7 @@ const initialWorkingHourState = {
     },
     {
       day: DAYS.FRI,
-      times: [{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
+      times: [], //[{ from: TIMES.DEFAULT_BEFORE, to: TIMES.DEFAULT_AFTER }],
     },
     {
       day: DAYS.SAT,
@@ -40,6 +40,7 @@ const initialWorkingHourState = {
     },
   ],
   isModified: false,
+  isSyncedWithLocalStorage: false,
 };
 
 const workingHourSlice = createSlice({
@@ -60,9 +61,26 @@ const workingHourSlice = createSlice({
       }
 
       state.hours = newHours;
-    },
-    save(state) {
       state.isModified = true;
+    },
+    setHours(state, action) {
+      const newHours = action.payload.hours;
+      state.hours = newHours;
+      state.isSyncedWithLocalStorage = true;
+    },
+    setSync(state) {
+      state.isSyncedWithLocalStorage = true;
+    },
+    // updateHours(state, action) {
+    //   state.isModified = false;
+    // },
+    resetHours(state, action) {
+      const newHours = action.payload.hours;
+      state.hours = newHours;
+      state.isModified = false;
+    },
+    resetModified(state) {
+      state.isModified = false;
     },
   },
 });

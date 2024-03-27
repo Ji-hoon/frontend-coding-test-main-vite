@@ -20,6 +20,7 @@ export type StoreProps = {
   workingHour: {
     hours: WorkingHourType[];
     isModified: boolean;
+    isSyncedWithLocalStorage: boolean;
   };
 };
 
