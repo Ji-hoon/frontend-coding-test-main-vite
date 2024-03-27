@@ -4,6 +4,7 @@ import { TimeRangeType } from "../../global/types";
 import { useWorkingHours } from "../hooks/useWorkingHours";
 import Input from "../atoms/Input";
 import Button_Icontype from "../atoms/Button.icontype";
+import { useDropdown } from "../hooks/useDropdown";
 
 export default function Range_Input({
   id,
@@ -17,14 +18,39 @@ export default function Range_Input({
   isEmpty?: boolean;
 }) {
   const { addTimeRange, deleteTimeRange } = useWorkingHours();
+  const { clickSelectorInput } = useDropdown();
 
   return (
     <RangeInputWrapper>
-      {!isEmpty && (
+      {!isEmpty && time && (
         <>
-          <Input defaultValue={time?.from} />
+          <Input
+            id={`${day}_${id}_${TYPES.TIME_FROM}_${time.from}`}
+            defaultValue={time.from}
+            onClick={(event: React.SyntheticEvent) =>
+              clickSelectorInput({
+                id,
+                day,
+                time: time.from,
+                order: TYPES.TIME_FROM,
+                target: event.target as Element,
+              })
+            }
+          />
           -
-          <Input defaultValue={time?.to} />
+          <Input
+            id={`${day}_${id}_${TYPES.TIME_TO}_${time.to}`}
+            defaultValue={time.to}
+            onClick={(event: React.SyntheticEvent) =>
+              clickSelectorInput({
+                id,
+                day,
+                time: time.to,
+                order: TYPES.TIME_TO,
+                target: event.target as Element,
+              })
+            }
+          />
           &nbsp;
           <Button_Icontype
             onClick={() => deleteTimeRange({ day, id })}

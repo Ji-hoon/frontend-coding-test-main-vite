@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom";
 import { PortalProps } from "../../global/types";
 import styled from "styled-components";
+import { useDropdown } from "../hooks/useDropdown";
 
 const DropdownPortal = ({ children }: PortalProps) => {
   return ReactDOM.createPortal(
@@ -9,14 +10,19 @@ const DropdownPortal = ({ children }: PortalProps) => {
   );
 };
 
-export default function Dropdown({ children }: { children?: React.ReactNode }) {
-  //TODO: inputTime 값을 상태 값으로 가져옴
-
-  const isEnabled = false; //TODO : 추후 전역 상태 값으로 치환
+export default function Dropdown({
+  children,
+  isEnabled,
+}: {
+  children?: React.ReactNode;
+  isEnabled: boolean;
+}) {
+  const { clickDropdownBackdrop } = useDropdown();
 
   return (
     <DropdownPortal>
       <DropdownContainer $enabled={isEnabled}>
+        <div className="backdrop" onClick={clickDropdownBackdrop} />
         <>{children}</>
       </DropdownContainer>
     </DropdownPortal>
@@ -34,4 +40,10 @@ const DropdownContainer = styled.div<{
   opacity: ${(props) => (props.$enabled ? 1 : 0)};
 
   pointer-events: ${(props) => (props.$enabled ? "auto" : "none")};
+
+  & .backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
 `;

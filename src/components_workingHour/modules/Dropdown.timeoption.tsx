@@ -1,35 +1,35 @@
 import styled from "styled-components";
-import { COLORS, SIZES, VALUES } from "../../global/constants";
+import { COLORS, SIZES, TIMES, VALUES } from "../../global/constants";
 import { BoxtypeButton } from "../atoms/Button.boxtype";
+import { FiCheck } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import { DropdownTriggerPosAndSize, StoreProps } from "../../global/types";
+import { generateTimeOptions } from "../../utils/calcTimeOptions";
+import { useDropdown } from "../hooks/useDropdown";
 
 export default function Dropdown_TimeOption({
   selected,
 }: {
   selected: string;
 }) {
-  const selectedTime = selected;
-  console.log(selectedTime);
-
-  const optionItems = [
-    //TODO: 계산된 시간으로된 배열로 수정 필요
-    "00:00",
-    "00:15",
-    "00:30",
-    "00:45",
-    "01:00",
-    "01:15",
-    "01:30",
-    "01:45",
-    "09:00",
-    "01:45",
-  ];
+  const { dropdownPos } = useSelector((state: StoreProps) => state.workingHour);
+  const optionItems = generateTimeOptions({
+    from: TIMES.OPTION_START,
+    to: TIMES.OPTION_END,
+  });
+  const { clickTimeOption } = useDropdown();
 
   return (
-    <DropdownMenuListWrapper>
+    <DropdownMenuListWrapper $pos={dropdownPos}>
       {optionItems.map((item, index) => {
         return (
-          <OptionItems $isSelected={selectedTime === item} key={index}>
+          <OptionItems
+            onClick={clickTimeOption}
+            $isSelected={selected === item}
+            key={index}
+          >
             {item}
+            {selected === item && <FiCheck strokeWidth={4} />}
           </OptionItems>
         );
       })}
@@ -38,7 +38,9 @@ export default function Dropdown_TimeOption({
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-const DropdownMenuListWrapper = styled.div`
+const DropdownMenuListWrapper = styled.div<{
+  $pos: DropdownTriggerPosAndSize;
+}>`
   display: flex;
   flex-direction: column;
   padding: ${SIZES.XXS / 3}px 0;
@@ -52,25 +54,30 @@ const DropdownMenuListWrapper = styled.div`
   background: ${COLORS.BASIC_WHITE};
   box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.1);
 
-  max-height: calc(100vh - ${VALUES.DROPDOWN_MIN_HEIGHT}px);
-  min-height: ${VALUES.DROPDOWN_MIN_HEIGHT}px;
+  max-height: ${VALUES.DROPDOWN_MIN_HEIGHT}px;
+  /* min-height: ${VALUES.DROPDOWN_MIN_HEIGHT}px; */
   overflow-x: hidden;
   overflow-y: auto;
 
-  // 임시 스타일
-  top: 144px;
-  left: 220px;
+  top: ${(props) => props.$pos.y + props.$pos.height + SIZES.XXS / 3}px;
+  left: ${(props) => props.$pos.x}px;
+  bottom: ${SIZES.XL}px;
 `;
 
 // eslint-disable-next-line react-refresh/only-export-components
 const OptionItems = styled(BoxtypeButton)<{
   $isSelected: boolean;
 }>`
-  padding: ${SIZES.XXS}px ${SIZES.SM}px;
+  display: flex;
+  gap: ${SIZES.SM / 2}px;
+  justify-content: space-between;
+
+  padding: ${SIZES.XXS}px;
   background: ${COLORS.BASIC_WHITE};
   width: 100%;
   border-radius: 0;
 
+  font-weight: ${(props) => (props.$isSelected ? "bold" : "normal")};
   color: ${(props) =>
     props.$isSelected ? COLORS.BRAND_DEFAULT : COLORS.BASIC_BLACK};
 `;

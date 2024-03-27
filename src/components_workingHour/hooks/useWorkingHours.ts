@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ACTIONS, TIMES } from "../../global/constants";
 import { workingHourActions } from "../../store/workingHour.slice";
-import { calcNextTimes } from "../../utils/calcNextTimes";
+import { calcNextTimes } from "../../utils/calcTimeOptions";
 import { StoreProps, TimeRangeType } from "../../global/types";
 
 export function useWorkingHours() {

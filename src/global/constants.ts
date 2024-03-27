@@ -5,6 +5,8 @@ export const TYPES = {
   CONFIRM: "CONFIRM",
   ADD: "ADD",
   DELETE: "DELETE",
+  TIME_FROM: "FROM",
+  TIME_TO: "TO",
 };
 
 export const VALUES = {
@@ -15,9 +17,12 @@ export const VALUES = {
   ANIMATION_TIMING_SHORT: 300,
   ANIMATION_DELAY_50: 50,
   ANIMATION_DELAY_100: 100,
-  DROPDOWN_MIN_HEIGHT: 200,
+  DROPDOWN_MIN_HEIGHT: 320,
   FIELD_HEADING_MIN_WIDTH: 160,
   IMAGE_MIN_HEIGHT: 80,
+  DUMMY_TIME_YEAR: 2024,
+  DUMMY_TIME_MONTH: 3,
+  DUMMY_TIME_DAY: 27,
 };
 
 export const SIZES = {
@@ -47,6 +52,8 @@ export const DAYS = {
 export const TIMES = {
   DEFAULT_BEFORE: "09:00",
   DEFAULT_AFTER: "17:00",
+  OPTION_START: "00:00",
+  OPTION_END: "23:50",
 };
 
 export const ACTIONS = {
