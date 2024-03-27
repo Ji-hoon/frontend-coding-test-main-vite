@@ -16,4 +16,9 @@ const ActionBarWrapper = styled.div`
   gap: ${SIZES.XS / 2}px;
   padding: ${SIZES.SM}px;
   flex-direction: row-reverse;
+
+  position: sticky;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
 `;
