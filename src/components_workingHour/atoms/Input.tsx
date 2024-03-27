@@ -5,7 +5,7 @@ import Dropdown from "./Dropdown";
 import Dropdown_TimeOption from "./Dropdown.timeoption";
 
 export default function Input({ defaultValue }: { defaultValue?: string }) {
-  //   const timeOption = "09:00"; //TODO : default value를 props로 전달받도록 수정
+  //TODO : selected value를 props로 전달받도록 수정
   const handleOnchange = () => {
     console.log("input changed");
   };

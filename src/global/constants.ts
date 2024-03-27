@@ -42,6 +42,18 @@ export const DAYS = {
   SAT: "Saturday",
   SUN: "Sunday",
 };
+
+export const TIMES = {
+  DEFAULT_BEFORE: "09:00",
+  DEFAULT_AFTER: "17:00",
+};
+
+export const ACTIONS = {
+  ADD: "ADD",
+  DEL: "DELETE",
+  EDIT: "EDIT",
+};
+
 export const COLORS = {
   BRAND_DEEP: "#7552F6",
   BRAND_DEFAULT: "#7552F6",

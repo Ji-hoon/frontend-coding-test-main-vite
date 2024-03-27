@@ -6,13 +6,15 @@ import { BoxtypeButton } from "./Button.boxtype";
 export default function Button_Icontype({
   type,
   id,
+  onClick,
 }: {
   type: string;
   id?: string;
+  onClick?: () => void;
 }) {
   return (
     <>
-      <IcontypeButton id={id}>
+      <IcontypeButton id={id} onClick={onClick}>
         {type === TYPES.ADD && <FiPlus size={SIZES.LG} />}
         {type === TYPES.DELETE && <FiTrash2 size={SIZES.LG} />}
       </IcontypeButton>

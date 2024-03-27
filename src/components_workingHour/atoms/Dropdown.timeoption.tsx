@@ -11,6 +11,7 @@ export default function Dropdown_TimeOption({
   console.log(selectedTime);
 
   const optionItems = [
+    //TODO: 계산된 시간으로된 배열로 수정 필요
     "00:00",
     "00:15",
     "00:30",

@@ -8,19 +8,28 @@ export default function TimeField({
   times,
 }: {
   name: string;
-  times: TimeRangeType[] | undefined;
+  times: TimeRangeType[] | [];
 }) {
   const isEmpty = times?.length === 0;
-  console.log(name, times, isEmpty);
+  // console.log(name, times, isEmpty);
 
   return (
     <FieldContainer>
       <h4>{name}</h4>
       <TimesList>
-        {times?.map((time, index) => (
-          <Range_Input time={time} key={index} />
-        ))}
-        {isEmpty && <Range_Input isEmpty={isEmpty} />}
+        {times.length > 0 ? (
+          times.map((time, index) => (
+            <Range_Input
+              time={time}
+              key={index}
+              id={index}
+              day={name}
+              isEmpty={isEmpty}
+            />
+          ))
+        ) : (
+          <Range_Input id={0} day={name} isEmpty={isEmpty} />
+        )}
       </TimesList>
     </FieldContainer>
   );
@@ -31,7 +40,7 @@ const FieldContainer = styled.div`
   align-items: center;
   gap: ${SIZES.XXS}px;
   padding: ${SIZES.SM}px ${SIZES.XXS}px;
-  min-height: 74px;
+  min-height: 75px;
   box-sizing: border-box;
   border-bottom: 1px solid ${COLORS.GRAY_01_OVERAY};
 
