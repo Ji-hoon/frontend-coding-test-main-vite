@@ -8,12 +8,14 @@ export function userEventSetup(
   renderTree: {
     path: string;
     jsx: React.ReactNode;
-  }[]
+  }[],
+  loader?: () => object
 ) {
   const renderTreeArray = renderTree.map((tree) => {
     return {
       path: tree.path,
       element: tree.jsx,
+      loader: loader,
     };
   });
   const router = createBrowserRouter(renderTreeArray, {});
