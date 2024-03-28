@@ -24,7 +24,6 @@ export default function Dropdown_TimeOption({
     const selectedOption = event.target as Element;
     clickTimeOption(selectedOption);
   };
-  console.log(dropdownPos);
 
   return (
     <DropdownMenuListWrapper $pos={dropdownPos}>
