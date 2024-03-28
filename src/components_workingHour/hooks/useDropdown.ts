@@ -10,7 +10,6 @@ export function useDropdown() {
   const { selectedTimeId, selectedDay, selectedTimeOrder } = useSelector(
     (state: StoreProps) => state.workingHour
   );
-  //   console.log(selectedTime, selectedTimeOrder, selectedTimeId, selectedDay);
 
   const clickSelectorInput = ({
     id,

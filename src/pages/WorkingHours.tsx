@@ -19,7 +19,6 @@ function WorkingHours() {
   const { result } = useLoaderData() as workingOurLoaderType;
 
   useEffect(() => {
-    console.log(result);
     if (Object.keys(result).length === 0 && !isSyncedWithLocalStorage) {
       localStorage.setItem("workingHour", JSON.stringify(hours));
       dispatch(workingHourActions.setSync());
@@ -34,7 +33,7 @@ function WorkingHours() {
 
   return (
     <>
-      <h2>2번 과제 - WorkingHours</h2>
+      <h2 style={{ maxWidth: "960px" }}>Set your weekly hours</h2>
       {isSyncedWithLocalStorage && <Setting_Page hours={hours} />}
       {selectedTime && isDropdownOpen && (
         <Dropdown isEnabled={isDropdownOpen}>

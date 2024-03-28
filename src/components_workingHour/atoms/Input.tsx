@@ -1,4 +1,4 @@
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown, FiAlertCircle } from "react-icons/fi";
 import styled from "styled-components";
 import { COLORS, SIZES, VALUES } from "../../global/constants";
 import { useSelector } from "react-redux";
@@ -47,7 +47,12 @@ export default function Input({
         />
         <FiChevronDown strokeWidth="3" />
       </SelectorInputContainer>
-      {!isValid && <span>Invalid Time</span>}
+      {!isValid && (
+        <span>
+          <FiAlertCircle />
+          Invalid time range
+        </span>
+      )}
     </SelectInputWrapper>
   );
 }
@@ -59,6 +64,10 @@ const SelectInputWrapper = styled.div`
   gap: ${SIZES.XXS / 3}px;
 
   & span {
+    display: flex;
+    gap: ${SIZES.XXS / 3}px;
+    white-space: nowrap;
+    align-items: center;
     font-size: 14px;
     color: ${COLORS.VARIATION_RED};
   }

@@ -24,6 +24,7 @@ export default function Dropdown_TimeOption({
     const selectedOption = event.target as Element;
     clickTimeOption(selectedOption);
   };
+  console.log(dropdownPos);
 
   return (
     <DropdownMenuListWrapper $pos={dropdownPos}>
@@ -65,9 +66,15 @@ const DropdownMenuListWrapper = styled.div<{
   overflow-x: hidden;
   overflow-y: auto;
 
-  top: ${(props) => props.$pos.y + props.$pos.height + SIZES.XXS / 3}px;
+  top: ${(props) =>
+    props.$pos.bottom > SIZES.DROPDOWN_MIN_HEIGHT / 2
+      ? `${props.$pos.y + props.$pos.height + SIZES.XXS / 3}px`
+      : "auto"};
   left: ${(props) => props.$pos.x}px;
-  bottom: ${SIZES.XL}px;
+  bottom: ${(props) =>
+    props.$pos.bottom > SIZES.DROPDOWN_MIN_HEIGHT / 2
+      ? SIZES.XL
+      : props.$pos.bottom + props.$pos.height + SIZES.XXS / 3}px;
   width: ${(props) => props.$pos.width}px;
 `;
 

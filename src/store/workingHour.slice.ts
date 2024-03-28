@@ -59,6 +59,7 @@ const initialWorkingHourState = {
     y: 0,
     width: 0,
     height: 0,
+    bottom: 0,
   },
   selectedTime: "",
   selectedTimeOrder: undefined,
@@ -119,9 +120,11 @@ const workingHourSlice = createSlice({
       const newHours = action.payload.hours;
       state.hours = newHours;
       state.isModified = false;
+      state.isAvailable = true;
     },
     resetModified(state) {
       state.isModified = false;
+      state.isAvailable = true;
     },
     openDropdown(state, action) {
       state.selectedTime = action.payload.time;

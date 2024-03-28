@@ -47,12 +47,10 @@ export function validateTimeRange({
   const targetTime = convertStrToDate(endTime);
 
   if (order === TYPES.TIME_FROM && isBefore(targetTimeDate, targetTime)) {
-    console.log(isBefore(targetTimeDate, targetTime));
     return { result: true };
   }
 
   if (order === TYPES.TIME_TO && isAfter(targetTime, targetTimeDate)) {
-    console.log(isAfter(targetTime, targetTimeDate));
     return { result: true };
   }
 

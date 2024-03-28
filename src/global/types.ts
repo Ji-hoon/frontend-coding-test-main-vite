@@ -54,4 +54,5 @@ export type DropdownTriggerPosAndSize = {
   y: number;
   width: number;
   height: number;
+  bottom: number;
 };

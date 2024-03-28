@@ -17,9 +17,11 @@ export const ImageColumn = styled.div<{ $columnCount: number }>`
 export const ImageListContainer = styled.div<{ $isLoading?: boolean }>`
   display: flex;
   max-width: 1200px;
-  min-height: 100vh;
+  min-height: calc(100% - 64px);
+  box-sizing: border-box;
   margin: 0 auto;
   gap: 16px;
+  padding: 16px 0;
   flex-wrap: wrap;
   justify-content: center;
 
