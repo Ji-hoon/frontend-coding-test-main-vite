@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { expect, vi } from "vitest";
+import { expect } from "vitest";
 import { userEventSetup } from "./util/util";
 import CatViewer from "../pages/CatViewer";
 import { screen, waitFor } from "@testing-library/react";
